@@ -2,6 +2,13 @@ import React from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/epics/")({
+  async loader() {
+    fetch("http://localhost:3000/epics")
+      .then((resp) => resp.json())
+      .then((resp) => {
+        console.log("GET", resp);
+      });
+  },
   component: Index,
 });
 
