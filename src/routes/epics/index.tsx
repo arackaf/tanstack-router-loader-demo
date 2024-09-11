@@ -2,12 +2,16 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/epics/")({
   async loader() {
-    fetch("http://localhost:3000/epics")
+    const epics = await fetch("http://localhost:3000/epics")
       .then((resp) => resp.json())
       .then((resp) => {
         console.log("GET", resp);
       });
+
+    return { epics };
   },
+  staleTime: 1000 * 5,
+  gcTime: 1000 * 10,
   component: Index,
 });
 
