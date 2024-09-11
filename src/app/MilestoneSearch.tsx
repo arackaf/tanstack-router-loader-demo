@@ -1,5 +1,5 @@
 import { getRouteApi, useNavigate } from "@tanstack/react-router";
-import { FC, useRef, useState } from "react";
+import { FC, useRef } from "react";
 
 const route = getRouteApi("/epics/$epicId/milestones/");
 
