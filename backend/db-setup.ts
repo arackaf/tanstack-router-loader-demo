@@ -11,8 +11,10 @@ export async function setup() {
     }
 
     await run("DROP TABLE IF EXISTS epics");
-
     await run("CREATE TABLE epics (id INT PRIMARY KEY, name TEXT, userId INT)");
+
+    await run("DROP TABLE IF EXISTS tasks");
+    await run("CREATE TABLE tasks (id INT PRIMARY KEY, name TEXT, userId INT, epicId INT)");
 
     for (const epic of epics) {
       await run("INSERT INTO epics VALUES (?, ?, ?)", [epic.id, epic.name, epic.userId]);
