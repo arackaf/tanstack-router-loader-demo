@@ -6,7 +6,9 @@ export const Route = createFileRoute("/epics")({
 });
 
 function EpicLayout() {
-  <div className="p-3">
-    Epics layout <Outlet />
-  </div>;
+  return (
+    <div className="p-3">
+      Epics layout <Outlet />
+    </div>
+  );
 }
