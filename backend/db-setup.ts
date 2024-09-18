@@ -1,5 +1,5 @@
 import sqlite3Module from "sqlite3";
-import { epics } from "./epics";
+import { epics } from "./seed-data";
 
 const sqlite3 = sqlite3Module.verbose();
 
@@ -10,14 +10,17 @@ export async function setup() {
       return;
     }
 
+    await run("DROP TABLE IF EXISTS users");
+    await run("CREATE TABLE users (id INT PRIMARY KEY, name TEXT)");
+
     await run("DROP TABLE IF EXISTS epics");
-    await run("CREATE TABLE epics (id INT PRIMARY KEY, name TEXT, userId INT)");
+    await run("CREATE TABLE epics (id INT PRIMARY KEY, name TEXT)");
 
     await run("DROP TABLE IF EXISTS tasks");
-    await run("CREATE TABLE tasks (id INT PRIMARY KEY, name TEXT, userId INT, epicId INT)");
+    await run("CREATE TABLE tasks (id INT PRIMARY KEY, name TEXT, epicId INT, userId INT)");
 
     for (const epic of epics) {
-      await run("INSERT INTO epics VALUES (?, ?, ?)", [epic.id, epic.name, epic.userId]);
+      await run("INSERT INTO epics VALUES (?, ?, ?)", [epic.id, epic.title]);
     }
 
     function run(command: string, params: unknown[] = []): Promise<void> {
