@@ -39,6 +39,17 @@ app.get("/api/tasks/overview", function (req, res) {
   });
 });
 
+app.get("/api/tasks", function (req, res) {
+  console.log({ userId: req.cookies.user });
+  query(`
+    SELECT * 
+    FROM tasks t
+    WHERE userId = 1
+  `).then((epics) => {
+    res.json(epics);
+  });
+});
+
 app.post("/update", jsonParser, function (req, res) {
   console.log(req.body);
   res.json({ a: req.body });

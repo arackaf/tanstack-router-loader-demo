@@ -1,7 +1,17 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { fetchJson } from "../../backend/fetchUtils";
+
+type Task = any;
 
 export const Route = createFileRoute("/tasks/")({
   component: Index,
+  loader: async ({ context }) => {
+    const now = +new Date();
+    console.log(`/tasks/index path loader. Loading tasks at + ${now - context.timestarted}ms since start`);
+    const tasks = await fetchJson<Task[]>("api/tasks");
+    console.log({ tasks });
+    return { tasks };
+  },
 });
 
 function Index() {

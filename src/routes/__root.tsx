@@ -2,12 +2,15 @@ import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import { getCurrentUser } from "../../backend/auth";
 
 export const Route = createRootRoute({
-  async beforeLoad() {
+  async beforeLoad({ location }) {
     const timeStarted = +new Date();
+    console.log("");
+    console.log("Fresh navigation to", location.href);
+    console.log("------------------------------------------------------------------------------------");
     console.log("Root beforeLoad. Loading authentication info");
     const currentUser = await getCurrentUser();
 
-    document.cookie = `user-id=${currentUser.id};path=/;max-age=31536000`;
+    document.cookie = `user=${currentUser.id};path=/;max-age=31536000`;
 
     return { currentUser, timestarted: timeStarted };
   },
