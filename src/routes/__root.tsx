@@ -3,8 +3,13 @@ import { getCurrentUser } from "../../backend/auth";
 
 export const Route = createRootRoute({
   async beforeLoad() {
+    const timeStarted = +new Date();
+    console.log("Root beforeLoad. Loading authentication info");
     const currentUser = await getCurrentUser();
-    return { currentUser };
+
+    document.cookie = `user-id=${currentUser.id};path=/;max-age=31536000`;
+
+    return { currentUser, timestarted: timeStarted };
   },
   component: Root,
 });
