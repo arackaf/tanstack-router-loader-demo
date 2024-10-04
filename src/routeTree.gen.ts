@@ -198,25 +198,167 @@ declare module '@tanstack/react-router' {
 
 // Create and export the route tree
 
-export const routeTree = rootRoute.addChildren({
-  IndexRoute,
-  EpicsRouteRoute: EpicsRouteRoute.addChildren({
-    EpicsIndexRoute,
-    EpicsEpicIdMilestonesRouteRoute:
-      EpicsEpicIdMilestonesRouteRoute.addChildren({
-        EpicsEpicIdMilestonesIndexRoute,
-        EpicsEpicIdMilestonesMilestoneIdIndexRoute,
-      }),
-    EpicsEpicIdEditRoute,
-    EpicsEpicIdIndexRoute,
+interface EpicsEpicIdMilestonesRouteRouteChildren {
+  EpicsEpicIdMilestonesIndexRoute: typeof EpicsEpicIdMilestonesIndexRoute
+  EpicsEpicIdMilestonesMilestoneIdIndexRoute: typeof EpicsEpicIdMilestonesMilestoneIdIndexRoute
+}
+
+const EpicsEpicIdMilestonesRouteRouteChildren: EpicsEpicIdMilestonesRouteRouteChildren =
+  {
+    EpicsEpicIdMilestonesIndexRoute: EpicsEpicIdMilestonesIndexRoute,
+    EpicsEpicIdMilestonesMilestoneIdIndexRoute:
+      EpicsEpicIdMilestonesMilestoneIdIndexRoute,
+  }
+
+const EpicsEpicIdMilestonesRouteRouteWithChildren =
+  EpicsEpicIdMilestonesRouteRoute._addFileChildren(
+    EpicsEpicIdMilestonesRouteRouteChildren,
+  )
+
+interface EpicsRouteRouteChildren {
+  EpicsIndexRoute: typeof EpicsIndexRoute
+  EpicsEpicIdMilestonesRouteRoute: typeof EpicsEpicIdMilestonesRouteRouteWithChildren
+  EpicsEpicIdEditRoute: typeof EpicsEpicIdEditRoute
+  EpicsEpicIdIndexRoute: typeof EpicsEpicIdIndexRoute
+  EpicsEpicIdMilestonesMilestoneIdEditRoute: typeof EpicsEpicIdMilestonesMilestoneIdEditRoute
+}
+
+const EpicsRouteRouteChildren: EpicsRouteRouteChildren = {
+  EpicsIndexRoute: EpicsIndexRoute,
+  EpicsEpicIdMilestonesRouteRoute: EpicsEpicIdMilestonesRouteRouteWithChildren,
+  EpicsEpicIdEditRoute: EpicsEpicIdEditRoute,
+  EpicsEpicIdIndexRoute: EpicsEpicIdIndexRoute,
+  EpicsEpicIdMilestonesMilestoneIdEditRoute:
     EpicsEpicIdMilestonesMilestoneIdEditRoute,
-  }),
-  TasksRouteRoute: TasksRouteRoute.addChildren({
-    TasksIndexRoute,
-    TasksTaskIdIndexRoute,
-  }),
-  TasksTaskIdEditRoute,
-})
+}
+
+const EpicsRouteRouteWithChildren = EpicsRouteRoute._addFileChildren(
+  EpicsRouteRouteChildren,
+)
+
+interface TasksRouteRouteChildren {
+  TasksIndexRoute: typeof TasksIndexRoute
+  TasksTaskIdIndexRoute: typeof TasksTaskIdIndexRoute
+}
+
+const TasksRouteRouteChildren: TasksRouteRouteChildren = {
+  TasksIndexRoute: TasksIndexRoute,
+  TasksTaskIdIndexRoute: TasksTaskIdIndexRoute,
+}
+
+const TasksRouteRouteWithChildren = TasksRouteRoute._addFileChildren(
+  TasksRouteRouteChildren,
+)
+
+export interface FileRoutesByFullPath {
+  '/': typeof IndexRoute
+  '/epics': typeof EpicsRouteRouteWithChildren
+  '/tasks': typeof TasksRouteRouteWithChildren
+  '/epics/': typeof EpicsIndexRoute
+  '/tasks/': typeof TasksIndexRoute
+  '/epics/$epicId/milestones': typeof EpicsEpicIdMilestonesRouteRouteWithChildren
+  '/epics/$epicId/edit': typeof EpicsEpicIdEditRoute
+  '/tasks/$taskId/edit': typeof TasksTaskIdEditRoute
+  '/epics/$epicId': typeof EpicsEpicIdIndexRoute
+  '/tasks/$taskId': typeof TasksTaskIdIndexRoute
+  '/epics/$epicId/milestones/': typeof EpicsEpicIdMilestonesIndexRoute
+  '/epics/$epicId/milestones/$milestoneId/edit': typeof EpicsEpicIdMilestonesMilestoneIdEditRoute
+  '/epics/$epicId/milestones/$milestoneId': typeof EpicsEpicIdMilestonesMilestoneIdIndexRoute
+}
+
+export interface FileRoutesByTo {
+  '/': typeof IndexRoute
+  '/epics': typeof EpicsIndexRoute
+  '/tasks': typeof TasksIndexRoute
+  '/epics/$epicId/edit': typeof EpicsEpicIdEditRoute
+  '/tasks/$taskId/edit': typeof TasksTaskIdEditRoute
+  '/epics/$epicId': typeof EpicsEpicIdIndexRoute
+  '/tasks/$taskId': typeof TasksTaskIdIndexRoute
+  '/epics/$epicId/milestones': typeof EpicsEpicIdMilestonesIndexRoute
+  '/epics/$epicId/milestones/$milestoneId/edit': typeof EpicsEpicIdMilestonesMilestoneIdEditRoute
+  '/epics/$epicId/milestones/$milestoneId': typeof EpicsEpicIdMilestonesMilestoneIdIndexRoute
+}
+
+export interface FileRoutesById {
+  __root__: typeof rootRoute
+  '/': typeof IndexRoute
+  '/epics': typeof EpicsRouteRouteWithChildren
+  '/tasks': typeof TasksRouteRouteWithChildren
+  '/epics/': typeof EpicsIndexRoute
+  '/tasks/': typeof TasksIndexRoute
+  '/epics/$epicId/milestones': typeof EpicsEpicIdMilestonesRouteRouteWithChildren
+  '/epics/$epicId/edit': typeof EpicsEpicIdEditRoute
+  '/tasks/$taskId/edit': typeof TasksTaskIdEditRoute
+  '/epics/$epicId/': typeof EpicsEpicIdIndexRoute
+  '/tasks/$taskId/': typeof TasksTaskIdIndexRoute
+  '/epics/$epicId/milestones/': typeof EpicsEpicIdMilestonesIndexRoute
+  '/epics/$epicId/milestones/$milestoneId/edit': typeof EpicsEpicIdMilestonesMilestoneIdEditRoute
+  '/epics/$epicId/milestones/$milestoneId/': typeof EpicsEpicIdMilestonesMilestoneIdIndexRoute
+}
+
+export interface FileRouteTypes {
+  fileRoutesByFullPath: FileRoutesByFullPath
+  fullPaths:
+    | '/'
+    | '/epics'
+    | '/tasks'
+    | '/epics/'
+    | '/tasks/'
+    | '/epics/$epicId/milestones'
+    | '/epics/$epicId/edit'
+    | '/tasks/$taskId/edit'
+    | '/epics/$epicId'
+    | '/tasks/$taskId'
+    | '/epics/$epicId/milestones/'
+    | '/epics/$epicId/milestones/$milestoneId/edit'
+    | '/epics/$epicId/milestones/$milestoneId'
+  fileRoutesByTo: FileRoutesByTo
+  to:
+    | '/'
+    | '/epics'
+    | '/tasks'
+    | '/epics/$epicId/edit'
+    | '/tasks/$taskId/edit'
+    | '/epics/$epicId'
+    | '/tasks/$taskId'
+    | '/epics/$epicId/milestones'
+    | '/epics/$epicId/milestones/$milestoneId/edit'
+    | '/epics/$epicId/milestones/$milestoneId'
+  id:
+    | '__root__'
+    | '/'
+    | '/epics'
+    | '/tasks'
+    | '/epics/'
+    | '/tasks/'
+    | '/epics/$epicId/milestones'
+    | '/epics/$epicId/edit'
+    | '/tasks/$taskId/edit'
+    | '/epics/$epicId/'
+    | '/tasks/$taskId/'
+    | '/epics/$epicId/milestones/'
+    | '/epics/$epicId/milestones/$milestoneId/edit'
+    | '/epics/$epicId/milestones/$milestoneId/'
+  fileRoutesById: FileRoutesById
+}
+
+export interface RootRouteChildren {
+  IndexRoute: typeof IndexRoute
+  EpicsRouteRoute: typeof EpicsRouteRouteWithChildren
+  TasksRouteRoute: typeof TasksRouteRouteWithChildren
+  TasksTaskIdEditRoute: typeof TasksTaskIdEditRoute
+}
+
+const rootRouteChildren: RootRouteChildren = {
+  IndexRoute: IndexRoute,
+  EpicsRouteRoute: EpicsRouteRouteWithChildren,
+  TasksRouteRoute: TasksRouteRouteWithChildren,
+  TasksTaskIdEditRoute: TasksTaskIdEditRoute,
+}
+
+export const routeTree = rootRoute
+  ._addFileChildren(rootRouteChildren)
+  ._addFileTypes<FileRouteTypes>()
 
 /* prettier-ignore-end */
 
