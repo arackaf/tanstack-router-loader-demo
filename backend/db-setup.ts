@@ -17,7 +17,7 @@ export async function setup() {
     await run("CREATE TABLE epics (id INT PRIMARY KEY, name TEXT)");
 
     await run("DROP TABLE IF EXISTS tasks");
-    await run("CREATE TABLE tasks (id INT PRIMARY KEY, name TEXT, epicId INT, userId INT)");
+    await run("CREATE TABLE tasks (id INT PRIMARY KEY, title TEXT, epicId INT, userId INT)");
 
     for (const user of users) {
       await run("INSERT INTO users VALUES (?, ?)", [user.id, user.name]);

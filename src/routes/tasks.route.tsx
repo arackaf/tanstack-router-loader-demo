@@ -21,8 +21,6 @@ function TasksLayout() {
   const { tasksOverview } = Route.useLoaderData();
   return (
     <div className="flex flex-col gap-3">
-      <div>Tasks layout</div>
-      <hr />
       <div>Task overview</div>
       <div className="w-40 grid grid-cols-2">
         {tasksOverview.map((item) => (

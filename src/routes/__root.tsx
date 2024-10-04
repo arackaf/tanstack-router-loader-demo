@@ -2,7 +2,8 @@ import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
 import { getCurrentUser } from "../../backend/auth";
 
 export const Route = createRootRoute({
-  async beforeLoad({ location }) {
+  async beforeLoad({ location, context }) {
+    console.log({ context });
     const timeStarted = +new Date();
     console.log("");
     console.log("Fresh navigation to", location.href);

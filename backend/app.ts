@@ -20,8 +20,6 @@ app.get("/", function (req, res) {
 });
 
 app.get("/api/epics", function (req, res) {
-  console.log({ cookies: req.cookies["user-id"] });
-
   query("SELECT * FROM epics").then((epics) => {
     res.json(epics);
   });
@@ -39,13 +37,16 @@ app.get("/api/tasks/overview", function (req, res) {
   });
 });
 
-app.get("/api/tasks", function (req, res) {
-  console.log({ userId: req.cookies.user });
-  query(`
+app.get("/api/tasks", async function (req, res) {
+  const userId = Number(req.cookies.user);
+  query(
+    `
     SELECT * 
     FROM tasks t
-    WHERE userId = 1
-  `).then((epics) => {
+    WHERE userId = ?
+  `,
+    [userId]
+  ).then((epics) => {
     res.json(epics);
   });
 });
