@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { fetchJson } from "../../backend/fetchUtils";
+import { fetchJson } from "../../../backend/fetchUtils";
 
 type Task = any;
 
-export const Route = createFileRoute("/tasks/")({
+export const Route = createFileRoute("/app/tasks/")({
   component: Index,
   loader: async ({ context }) => {
     const now = +new Date();
@@ -23,10 +23,10 @@ function Index() {
         {tasks.map((t, idx) => (
           <div key={idx} className="flex gap-3 items-center">
             <div>{t.title}</div>
-            <Link to="/tasks/$taskId" className="border p-1 rounded" params={{ taskId: t.id }}>
+            <Link to="/app/tasks/$taskId" className="border p-1 rounded" params={{ taskId: t.id }}>
               View
             </Link>
-            <Link to="/tasks/$taskId/edit" className="border p-1 rounded" params={{ taskId: t.id }}>
+            <Link to="/app/tasks/$taskId/edit" className="border p-1 rounded" params={{ taskId: t.id }}>
               Edit
             </Link>
           </div>

@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { MilestoneSearch } from "../../../../app/MilestoneSearch";
+import { MilestoneSearch } from "../../../../../app/MilestoneSearch";
 
 const milestones = [
   { id: "1", name: "Milestone 1" },
@@ -13,7 +13,7 @@ type SearchParams = {
   tags: string[];
 };
 
-export const Route = createFileRoute("/epics/$epicId/milestones/")({
+export const Route = createFileRoute("/app/epics/$epicId/milestones/")({
   validateSearch(search: Record<string, unknown>): SearchParams {
     return {
       page: Number(search.page ?? "1") ?? 1,

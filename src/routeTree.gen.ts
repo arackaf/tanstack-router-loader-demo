@@ -11,29 +11,32 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
-import { Route as TasksRouteImport } from './routes/tasks.route'
-import { Route as EpicsRouteImport } from './routes/epics/route'
+import { Route as LoginImport } from './routes/login'
+import { Route as AppRouteImport } from './routes/app/route'
 import { Route as IndexImport } from './routes/index'
-import { Route as TasksIndexImport } from './routes/tasks.index'
-import { Route as EpicsIndexImport } from './routes/epics/index'
-import { Route as TasksTaskIdIndexImport } from './routes/tasks.$taskId.index'
-import { Route as EpicsEpicIdIndexImport } from './routes/epics/$epicId/index'
-import { Route as TasksTaskIdEditImport } from './routes/tasks_.$taskId.edit'
-import { Route as EpicsEpicIdEditImport } from './routes/epics/$epicId/edit'
-import { Route as EpicsEpicIdMilestonesRouteImport } from './routes/epics/$epicId/milestones/route'
-import { Route as EpicsEpicIdMilestonesIndexImport } from './routes/epics/$epicId/milestones/index'
-import { Route as EpicsEpicIdMilestonesMilestoneIdIndexImport } from './routes/epics/$epicId/milestones/$milestoneId.index'
-import { Route as EpicsEpicIdMilestonesMilestoneIdEditImport } from './routes/epics/$epicId/milestones_/$milestoneId.edit'
+import { Route as AppIndexImport } from './routes/app/index'
+import { Route as AppTasksRouteImport } from './routes/app/tasks.route'
+import { Route as AppEpicsRouteImport } from './routes/app/epics/route'
+import { Route as AppTasksIndexImport } from './routes/app/tasks.index'
+import { Route as AppEpicsIndexImport } from './routes/app/epics/index'
+import { Route as AppTasksTaskIdIndexImport } from './routes/app/tasks.$taskId.index'
+import { Route as AppEpicsEpicIdIndexImport } from './routes/app/epics/$epicId/index'
+import { Route as AppTasksTaskIdEditImport } from './routes/app/tasks_.$taskId.edit'
+import { Route as AppEpicsEpicIdEditImport } from './routes/app/epics/$epicId/edit'
+import { Route as AppEpicsEpicIdMilestonesRouteImport } from './routes/app/epics/$epicId/milestones/route'
+import { Route as AppEpicsEpicIdMilestonesIndexImport } from './routes/app/epics/$epicId/milestones/index'
+import { Route as AppEpicsEpicIdMilestonesMilestoneIdIndexImport } from './routes/app/epics/$epicId/milestones/$milestoneId.index'
+import { Route as AppEpicsEpicIdMilestonesMilestoneIdEditImport } from './routes/app/epics/$epicId/milestones_/$milestoneId.edit'
 
 // Create/Update Routes
 
-const TasksRouteRoute = TasksRouteImport.update({
-  path: '/tasks',
+const LoginRoute = LoginImport.update({
+  path: '/login',
   getParentRoute: () => rootRoute,
 } as any)
 
-const EpicsRouteRoute = EpicsRouteImport.update({
-  path: '/epics',
+const AppRouteRoute = AppRouteImport.update({
+  path: '/app',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -42,60 +45,73 @@ const IndexRoute = IndexImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const TasksIndexRoute = TasksIndexImport.update({
+const AppIndexRoute = AppIndexImport.update({
   path: '/',
-  getParentRoute: () => TasksRouteRoute,
+  getParentRoute: () => AppRouteRoute,
 } as any)
 
-const EpicsIndexRoute = EpicsIndexImport.update({
-  path: '/',
-  getParentRoute: () => EpicsRouteRoute,
+const AppTasksRouteRoute = AppTasksRouteImport.update({
+  path: '/tasks',
+  getParentRoute: () => AppRouteRoute,
 } as any)
 
-const TasksTaskIdIndexRoute = TasksTaskIdIndexImport.update({
+const AppEpicsRouteRoute = AppEpicsRouteImport.update({
+  path: '/epics',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+
+const AppTasksIndexRoute = AppTasksIndexImport.update({
+  path: '/',
+  getParentRoute: () => AppTasksRouteRoute,
+} as any)
+
+const AppEpicsIndexRoute = AppEpicsIndexImport.update({
+  path: '/',
+  getParentRoute: () => AppEpicsRouteRoute,
+} as any)
+
+const AppTasksTaskIdIndexRoute = AppTasksTaskIdIndexImport.update({
   path: '/$taskId/',
-  getParentRoute: () => TasksRouteRoute,
+  getParentRoute: () => AppTasksRouteRoute,
 } as any)
 
-const EpicsEpicIdIndexRoute = EpicsEpicIdIndexImport.update({
+const AppEpicsEpicIdIndexRoute = AppEpicsEpicIdIndexImport.update({
   path: '/$epicId/',
-  getParentRoute: () => EpicsRouteRoute,
+  getParentRoute: () => AppEpicsRouteRoute,
 } as any)
 
-const TasksTaskIdEditRoute = TasksTaskIdEditImport.update({
+const AppTasksTaskIdEditRoute = AppTasksTaskIdEditImport.update({
   path: '/tasks/$taskId/edit',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => AppRouteRoute,
 } as any)
 
-const EpicsEpicIdEditRoute = EpicsEpicIdEditImport.update({
+const AppEpicsEpicIdEditRoute = AppEpicsEpicIdEditImport.update({
   path: '/$epicId/edit',
-  getParentRoute: () => EpicsRouteRoute,
+  getParentRoute: () => AppEpicsRouteRoute,
 } as any)
 
-const EpicsEpicIdMilestonesRouteRoute = EpicsEpicIdMilestonesRouteImport.update(
-  {
+const AppEpicsEpicIdMilestonesRouteRoute =
+  AppEpicsEpicIdMilestonesRouteImport.update({
     path: '/$epicId/milestones',
-    getParentRoute: () => EpicsRouteRoute,
-  } as any,
-)
-
-const EpicsEpicIdMilestonesIndexRoute = EpicsEpicIdMilestonesIndexImport.update(
-  {
-    path: '/',
-    getParentRoute: () => EpicsEpicIdMilestonesRouteRoute,
-  } as any,
-)
-
-const EpicsEpicIdMilestonesMilestoneIdIndexRoute =
-  EpicsEpicIdMilestonesMilestoneIdIndexImport.update({
-    path: '/$milestoneId/',
-    getParentRoute: () => EpicsEpicIdMilestonesRouteRoute,
+    getParentRoute: () => AppEpicsRouteRoute,
   } as any)
 
-const EpicsEpicIdMilestonesMilestoneIdEditRoute =
-  EpicsEpicIdMilestonesMilestoneIdEditImport.update({
+const AppEpicsEpicIdMilestonesIndexRoute =
+  AppEpicsEpicIdMilestonesIndexImport.update({
+    path: '/',
+    getParentRoute: () => AppEpicsEpicIdMilestonesRouteRoute,
+  } as any)
+
+const AppEpicsEpicIdMilestonesMilestoneIdIndexRoute =
+  AppEpicsEpicIdMilestonesMilestoneIdIndexImport.update({
+    path: '/$milestoneId/',
+    getParentRoute: () => AppEpicsEpicIdMilestonesRouteRoute,
+  } as any)
+
+const AppEpicsEpicIdMilestonesMilestoneIdEditRoute =
+  AppEpicsEpicIdMilestonesMilestoneIdEditImport.update({
     path: '/$epicId/milestones/$milestoneId/edit',
-    getParentRoute: () => EpicsRouteRoute,
+    getParentRoute: () => AppEpicsRouteRoute,
   } as any)
 
 // Populate the FileRoutesByPath interface
@@ -109,251 +125,305 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexImport
       parentRoute: typeof rootRoute
     }
-    '/epics': {
-      id: '/epics'
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
+      parentRoute: typeof rootRoute
+    }
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginImport
+      parentRoute: typeof rootRoute
+    }
+    '/app/epics': {
+      id: '/app/epics'
       path: '/epics'
-      fullPath: '/epics'
-      preLoaderRoute: typeof EpicsRouteImport
-      parentRoute: typeof rootRoute
+      fullPath: '/app/epics'
+      preLoaderRoute: typeof AppEpicsRouteImport
+      parentRoute: typeof AppRouteImport
     }
-    '/tasks': {
-      id: '/tasks'
+    '/app/tasks': {
+      id: '/app/tasks'
       path: '/tasks'
-      fullPath: '/tasks'
-      preLoaderRoute: typeof TasksRouteImport
-      parentRoute: typeof rootRoute
+      fullPath: '/app/tasks'
+      preLoaderRoute: typeof AppTasksRouteImport
+      parentRoute: typeof AppRouteImport
     }
-    '/epics/': {
-      id: '/epics/'
+    '/app/': {
+      id: '/app/'
       path: '/'
-      fullPath: '/epics/'
-      preLoaderRoute: typeof EpicsIndexImport
-      parentRoute: typeof EpicsRouteImport
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexImport
+      parentRoute: typeof AppRouteImport
     }
-    '/tasks/': {
-      id: '/tasks/'
+    '/app/epics/': {
+      id: '/app/epics/'
       path: '/'
-      fullPath: '/tasks/'
-      preLoaderRoute: typeof TasksIndexImport
-      parentRoute: typeof TasksRouteImport
+      fullPath: '/app/epics/'
+      preLoaderRoute: typeof AppEpicsIndexImport
+      parentRoute: typeof AppEpicsRouteImport
     }
-    '/epics/$epicId/milestones': {
-      id: '/epics/$epicId/milestones'
+    '/app/tasks/': {
+      id: '/app/tasks/'
+      path: '/'
+      fullPath: '/app/tasks/'
+      preLoaderRoute: typeof AppTasksIndexImport
+      parentRoute: typeof AppTasksRouteImport
+    }
+    '/app/epics/$epicId/milestones': {
+      id: '/app/epics/$epicId/milestones'
       path: '/$epicId/milestones'
-      fullPath: '/epics/$epicId/milestones'
-      preLoaderRoute: typeof EpicsEpicIdMilestonesRouteImport
-      parentRoute: typeof EpicsRouteImport
+      fullPath: '/app/epics/$epicId/milestones'
+      preLoaderRoute: typeof AppEpicsEpicIdMilestonesRouteImport
+      parentRoute: typeof AppEpicsRouteImport
     }
-    '/epics/$epicId/edit': {
-      id: '/epics/$epicId/edit'
+    '/app/epics/$epicId/edit': {
+      id: '/app/epics/$epicId/edit'
       path: '/$epicId/edit'
-      fullPath: '/epics/$epicId/edit'
-      preLoaderRoute: typeof EpicsEpicIdEditImport
-      parentRoute: typeof EpicsRouteImport
+      fullPath: '/app/epics/$epicId/edit'
+      preLoaderRoute: typeof AppEpicsEpicIdEditImport
+      parentRoute: typeof AppEpicsRouteImport
     }
-    '/tasks/$taskId/edit': {
-      id: '/tasks/$taskId/edit'
+    '/app/tasks/$taskId/edit': {
+      id: '/app/tasks/$taskId/edit'
       path: '/tasks/$taskId/edit'
-      fullPath: '/tasks/$taskId/edit'
-      preLoaderRoute: typeof TasksTaskIdEditImport
-      parentRoute: typeof rootRoute
+      fullPath: '/app/tasks/$taskId/edit'
+      preLoaderRoute: typeof AppTasksTaskIdEditImport
+      parentRoute: typeof AppRouteImport
     }
-    '/epics/$epicId/': {
-      id: '/epics/$epicId/'
+    '/app/epics/$epicId/': {
+      id: '/app/epics/$epicId/'
       path: '/$epicId'
-      fullPath: '/epics/$epicId'
-      preLoaderRoute: typeof EpicsEpicIdIndexImport
-      parentRoute: typeof EpicsRouteImport
+      fullPath: '/app/epics/$epicId'
+      preLoaderRoute: typeof AppEpicsEpicIdIndexImport
+      parentRoute: typeof AppEpicsRouteImport
     }
-    '/tasks/$taskId/': {
-      id: '/tasks/$taskId/'
+    '/app/tasks/$taskId/': {
+      id: '/app/tasks/$taskId/'
       path: '/$taskId'
-      fullPath: '/tasks/$taskId'
-      preLoaderRoute: typeof TasksTaskIdIndexImport
-      parentRoute: typeof TasksRouteImport
+      fullPath: '/app/tasks/$taskId'
+      preLoaderRoute: typeof AppTasksTaskIdIndexImport
+      parentRoute: typeof AppTasksRouteImport
     }
-    '/epics/$epicId/milestones/': {
-      id: '/epics/$epicId/milestones/'
+    '/app/epics/$epicId/milestones/': {
+      id: '/app/epics/$epicId/milestones/'
       path: '/'
-      fullPath: '/epics/$epicId/milestones/'
-      preLoaderRoute: typeof EpicsEpicIdMilestonesIndexImport
-      parentRoute: typeof EpicsEpicIdMilestonesRouteImport
+      fullPath: '/app/epics/$epicId/milestones/'
+      preLoaderRoute: typeof AppEpicsEpicIdMilestonesIndexImport
+      parentRoute: typeof AppEpicsEpicIdMilestonesRouteImport
     }
-    '/epics/$epicId/milestones/$milestoneId/edit': {
-      id: '/epics/$epicId/milestones/$milestoneId/edit'
+    '/app/epics/$epicId/milestones/$milestoneId/edit': {
+      id: '/app/epics/$epicId/milestones/$milestoneId/edit'
       path: '/$epicId/milestones/$milestoneId/edit'
-      fullPath: '/epics/$epicId/milestones/$milestoneId/edit'
-      preLoaderRoute: typeof EpicsEpicIdMilestonesMilestoneIdEditImport
-      parentRoute: typeof EpicsRouteImport
+      fullPath: '/app/epics/$epicId/milestones/$milestoneId/edit'
+      preLoaderRoute: typeof AppEpicsEpicIdMilestonesMilestoneIdEditImport
+      parentRoute: typeof AppEpicsRouteImport
     }
-    '/epics/$epicId/milestones/$milestoneId/': {
-      id: '/epics/$epicId/milestones/$milestoneId/'
+    '/app/epics/$epicId/milestones/$milestoneId/': {
+      id: '/app/epics/$epicId/milestones/$milestoneId/'
       path: '/$milestoneId'
-      fullPath: '/epics/$epicId/milestones/$milestoneId'
-      preLoaderRoute: typeof EpicsEpicIdMilestonesMilestoneIdIndexImport
-      parentRoute: typeof EpicsEpicIdMilestonesRouteImport
+      fullPath: '/app/epics/$epicId/milestones/$milestoneId'
+      preLoaderRoute: typeof AppEpicsEpicIdMilestonesMilestoneIdIndexImport
+      parentRoute: typeof AppEpicsEpicIdMilestonesRouteImport
     }
   }
 }
 
 // Create and export the route tree
 
-interface EpicsEpicIdMilestonesRouteRouteChildren {
-  EpicsEpicIdMilestonesIndexRoute: typeof EpicsEpicIdMilestonesIndexRoute
-  EpicsEpicIdMilestonesMilestoneIdIndexRoute: typeof EpicsEpicIdMilestonesMilestoneIdIndexRoute
+interface AppEpicsEpicIdMilestonesRouteRouteChildren {
+  AppEpicsEpicIdMilestonesIndexRoute: typeof AppEpicsEpicIdMilestonesIndexRoute
+  AppEpicsEpicIdMilestonesMilestoneIdIndexRoute: typeof AppEpicsEpicIdMilestonesMilestoneIdIndexRoute
 }
 
-const EpicsEpicIdMilestonesRouteRouteChildren: EpicsEpicIdMilestonesRouteRouteChildren =
+const AppEpicsEpicIdMilestonesRouteRouteChildren: AppEpicsEpicIdMilestonesRouteRouteChildren =
   {
-    EpicsEpicIdMilestonesIndexRoute: EpicsEpicIdMilestonesIndexRoute,
-    EpicsEpicIdMilestonesMilestoneIdIndexRoute:
-      EpicsEpicIdMilestonesMilestoneIdIndexRoute,
+    AppEpicsEpicIdMilestonesIndexRoute: AppEpicsEpicIdMilestonesIndexRoute,
+    AppEpicsEpicIdMilestonesMilestoneIdIndexRoute:
+      AppEpicsEpicIdMilestonesMilestoneIdIndexRoute,
   }
 
-const EpicsEpicIdMilestonesRouteRouteWithChildren =
-  EpicsEpicIdMilestonesRouteRoute._addFileChildren(
-    EpicsEpicIdMilestonesRouteRouteChildren,
+const AppEpicsEpicIdMilestonesRouteRouteWithChildren =
+  AppEpicsEpicIdMilestonesRouteRoute._addFileChildren(
+    AppEpicsEpicIdMilestonesRouteRouteChildren,
   )
 
-interface EpicsRouteRouteChildren {
-  EpicsIndexRoute: typeof EpicsIndexRoute
-  EpicsEpicIdMilestonesRouteRoute: typeof EpicsEpicIdMilestonesRouteRouteWithChildren
-  EpicsEpicIdEditRoute: typeof EpicsEpicIdEditRoute
-  EpicsEpicIdIndexRoute: typeof EpicsEpicIdIndexRoute
-  EpicsEpicIdMilestonesMilestoneIdEditRoute: typeof EpicsEpicIdMilestonesMilestoneIdEditRoute
+interface AppEpicsRouteRouteChildren {
+  AppEpicsIndexRoute: typeof AppEpicsIndexRoute
+  AppEpicsEpicIdMilestonesRouteRoute: typeof AppEpicsEpicIdMilestonesRouteRouteWithChildren
+  AppEpicsEpicIdEditRoute: typeof AppEpicsEpicIdEditRoute
+  AppEpicsEpicIdIndexRoute: typeof AppEpicsEpicIdIndexRoute
+  AppEpicsEpicIdMilestonesMilestoneIdEditRoute: typeof AppEpicsEpicIdMilestonesMilestoneIdEditRoute
 }
 
-const EpicsRouteRouteChildren: EpicsRouteRouteChildren = {
-  EpicsIndexRoute: EpicsIndexRoute,
-  EpicsEpicIdMilestonesRouteRoute: EpicsEpicIdMilestonesRouteRouteWithChildren,
-  EpicsEpicIdEditRoute: EpicsEpicIdEditRoute,
-  EpicsEpicIdIndexRoute: EpicsEpicIdIndexRoute,
-  EpicsEpicIdMilestonesMilestoneIdEditRoute:
-    EpicsEpicIdMilestonesMilestoneIdEditRoute,
+const AppEpicsRouteRouteChildren: AppEpicsRouteRouteChildren = {
+  AppEpicsIndexRoute: AppEpicsIndexRoute,
+  AppEpicsEpicIdMilestonesRouteRoute:
+    AppEpicsEpicIdMilestonesRouteRouteWithChildren,
+  AppEpicsEpicIdEditRoute: AppEpicsEpicIdEditRoute,
+  AppEpicsEpicIdIndexRoute: AppEpicsEpicIdIndexRoute,
+  AppEpicsEpicIdMilestonesMilestoneIdEditRoute:
+    AppEpicsEpicIdMilestonesMilestoneIdEditRoute,
 }
 
-const EpicsRouteRouteWithChildren = EpicsRouteRoute._addFileChildren(
-  EpicsRouteRouteChildren,
+const AppEpicsRouteRouteWithChildren = AppEpicsRouteRoute._addFileChildren(
+  AppEpicsRouteRouteChildren,
 )
 
-interface TasksRouteRouteChildren {
-  TasksIndexRoute: typeof TasksIndexRoute
-  TasksTaskIdIndexRoute: typeof TasksTaskIdIndexRoute
+interface AppTasksRouteRouteChildren {
+  AppTasksIndexRoute: typeof AppTasksIndexRoute
+  AppTasksTaskIdIndexRoute: typeof AppTasksTaskIdIndexRoute
 }
 
-const TasksRouteRouteChildren: TasksRouteRouteChildren = {
-  TasksIndexRoute: TasksIndexRoute,
-  TasksTaskIdIndexRoute: TasksTaskIdIndexRoute,
+const AppTasksRouteRouteChildren: AppTasksRouteRouteChildren = {
+  AppTasksIndexRoute: AppTasksIndexRoute,
+  AppTasksTaskIdIndexRoute: AppTasksTaskIdIndexRoute,
 }
 
-const TasksRouteRouteWithChildren = TasksRouteRoute._addFileChildren(
-  TasksRouteRouteChildren,
+const AppTasksRouteRouteWithChildren = AppTasksRouteRoute._addFileChildren(
+  AppTasksRouteRouteChildren,
+)
+
+interface AppRouteRouteChildren {
+  AppEpicsRouteRoute: typeof AppEpicsRouteRouteWithChildren
+  AppTasksRouteRoute: typeof AppTasksRouteRouteWithChildren
+  AppIndexRoute: typeof AppIndexRoute
+  AppTasksTaskIdEditRoute: typeof AppTasksTaskIdEditRoute
+}
+
+const AppRouteRouteChildren: AppRouteRouteChildren = {
+  AppEpicsRouteRoute: AppEpicsRouteRouteWithChildren,
+  AppTasksRouteRoute: AppTasksRouteRouteWithChildren,
+  AppIndexRoute: AppIndexRoute,
+  AppTasksTaskIdEditRoute: AppTasksTaskIdEditRoute,
+}
+
+const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
+  AppRouteRouteChildren,
 )
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/epics': typeof EpicsRouteRouteWithChildren
-  '/tasks': typeof TasksRouteRouteWithChildren
-  '/epics/': typeof EpicsIndexRoute
-  '/tasks/': typeof TasksIndexRoute
-  '/epics/$epicId/milestones': typeof EpicsEpicIdMilestonesRouteRouteWithChildren
-  '/epics/$epicId/edit': typeof EpicsEpicIdEditRoute
-  '/tasks/$taskId/edit': typeof TasksTaskIdEditRoute
-  '/epics/$epicId': typeof EpicsEpicIdIndexRoute
-  '/tasks/$taskId': typeof TasksTaskIdIndexRoute
-  '/epics/$epicId/milestones/': typeof EpicsEpicIdMilestonesIndexRoute
-  '/epics/$epicId/milestones/$milestoneId/edit': typeof EpicsEpicIdMilestonesMilestoneIdEditRoute
-  '/epics/$epicId/milestones/$milestoneId': typeof EpicsEpicIdMilestonesMilestoneIdIndexRoute
+  '/app': typeof AppRouteRouteWithChildren
+  '/login': typeof LoginRoute
+  '/app/epics': typeof AppEpicsRouteRouteWithChildren
+  '/app/tasks': typeof AppTasksRouteRouteWithChildren
+  '/app/': typeof AppIndexRoute
+  '/app/epics/': typeof AppEpicsIndexRoute
+  '/app/tasks/': typeof AppTasksIndexRoute
+  '/app/epics/$epicId/milestones': typeof AppEpicsEpicIdMilestonesRouteRouteWithChildren
+  '/app/epics/$epicId/edit': typeof AppEpicsEpicIdEditRoute
+  '/app/tasks/$taskId/edit': typeof AppTasksTaskIdEditRoute
+  '/app/epics/$epicId': typeof AppEpicsEpicIdIndexRoute
+  '/app/tasks/$taskId': typeof AppTasksTaskIdIndexRoute
+  '/app/epics/$epicId/milestones/': typeof AppEpicsEpicIdMilestonesIndexRoute
+  '/app/epics/$epicId/milestones/$milestoneId/edit': typeof AppEpicsEpicIdMilestonesMilestoneIdEditRoute
+  '/app/epics/$epicId/milestones/$milestoneId': typeof AppEpicsEpicIdMilestonesMilestoneIdIndexRoute
 }
 
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/epics': typeof EpicsIndexRoute
-  '/tasks': typeof TasksIndexRoute
-  '/epics/$epicId/edit': typeof EpicsEpicIdEditRoute
-  '/tasks/$taskId/edit': typeof TasksTaskIdEditRoute
-  '/epics/$epicId': typeof EpicsEpicIdIndexRoute
-  '/tasks/$taskId': typeof TasksTaskIdIndexRoute
-  '/epics/$epicId/milestones': typeof EpicsEpicIdMilestonesIndexRoute
-  '/epics/$epicId/milestones/$milestoneId/edit': typeof EpicsEpicIdMilestonesMilestoneIdEditRoute
-  '/epics/$epicId/milestones/$milestoneId': typeof EpicsEpicIdMilestonesMilestoneIdIndexRoute
+  '/login': typeof LoginRoute
+  '/app': typeof AppIndexRoute
+  '/app/epics': typeof AppEpicsIndexRoute
+  '/app/tasks': typeof AppTasksIndexRoute
+  '/app/epics/$epicId/edit': typeof AppEpicsEpicIdEditRoute
+  '/app/tasks/$taskId/edit': typeof AppTasksTaskIdEditRoute
+  '/app/epics/$epicId': typeof AppEpicsEpicIdIndexRoute
+  '/app/tasks/$taskId': typeof AppTasksTaskIdIndexRoute
+  '/app/epics/$epicId/milestones': typeof AppEpicsEpicIdMilestonesIndexRoute
+  '/app/epics/$epicId/milestones/$milestoneId/edit': typeof AppEpicsEpicIdMilestonesMilestoneIdEditRoute
+  '/app/epics/$epicId/milestones/$milestoneId': typeof AppEpicsEpicIdMilestonesMilestoneIdIndexRoute
 }
 
 export interface FileRoutesById {
   __root__: typeof rootRoute
   '/': typeof IndexRoute
-  '/epics': typeof EpicsRouteRouteWithChildren
-  '/tasks': typeof TasksRouteRouteWithChildren
-  '/epics/': typeof EpicsIndexRoute
-  '/tasks/': typeof TasksIndexRoute
-  '/epics/$epicId/milestones': typeof EpicsEpicIdMilestonesRouteRouteWithChildren
-  '/epics/$epicId/edit': typeof EpicsEpicIdEditRoute
-  '/tasks/$taskId/edit': typeof TasksTaskIdEditRoute
-  '/epics/$epicId/': typeof EpicsEpicIdIndexRoute
-  '/tasks/$taskId/': typeof TasksTaskIdIndexRoute
-  '/epics/$epicId/milestones/': typeof EpicsEpicIdMilestonesIndexRoute
-  '/epics/$epicId/milestones/$milestoneId/edit': typeof EpicsEpicIdMilestonesMilestoneIdEditRoute
-  '/epics/$epicId/milestones/$milestoneId/': typeof EpicsEpicIdMilestonesMilestoneIdIndexRoute
+  '/app': typeof AppRouteRouteWithChildren
+  '/login': typeof LoginRoute
+  '/app/epics': typeof AppEpicsRouteRouteWithChildren
+  '/app/tasks': typeof AppTasksRouteRouteWithChildren
+  '/app/': typeof AppIndexRoute
+  '/app/epics/': typeof AppEpicsIndexRoute
+  '/app/tasks/': typeof AppTasksIndexRoute
+  '/app/epics/$epicId/milestones': typeof AppEpicsEpicIdMilestonesRouteRouteWithChildren
+  '/app/epics/$epicId/edit': typeof AppEpicsEpicIdEditRoute
+  '/app/tasks/$taskId/edit': typeof AppTasksTaskIdEditRoute
+  '/app/epics/$epicId/': typeof AppEpicsEpicIdIndexRoute
+  '/app/tasks/$taskId/': typeof AppTasksTaskIdIndexRoute
+  '/app/epics/$epicId/milestones/': typeof AppEpicsEpicIdMilestonesIndexRoute
+  '/app/epics/$epicId/milestones/$milestoneId/edit': typeof AppEpicsEpicIdMilestonesMilestoneIdEditRoute
+  '/app/epics/$epicId/milestones/$milestoneId/': typeof AppEpicsEpicIdMilestonesMilestoneIdIndexRoute
 }
 
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/epics'
-    | '/tasks'
-    | '/epics/'
-    | '/tasks/'
-    | '/epics/$epicId/milestones'
-    | '/epics/$epicId/edit'
-    | '/tasks/$taskId/edit'
-    | '/epics/$epicId'
-    | '/tasks/$taskId'
-    | '/epics/$epicId/milestones/'
-    | '/epics/$epicId/milestones/$milestoneId/edit'
-    | '/epics/$epicId/milestones/$milestoneId'
+    | '/app'
+    | '/login'
+    | '/app/epics'
+    | '/app/tasks'
+    | '/app/'
+    | '/app/epics/'
+    | '/app/tasks/'
+    | '/app/epics/$epicId/milestones'
+    | '/app/epics/$epicId/edit'
+    | '/app/tasks/$taskId/edit'
+    | '/app/epics/$epicId'
+    | '/app/tasks/$taskId'
+    | '/app/epics/$epicId/milestones/'
+    | '/app/epics/$epicId/milestones/$milestoneId/edit'
+    | '/app/epics/$epicId/milestones/$milestoneId'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/epics'
-    | '/tasks'
-    | '/epics/$epicId/edit'
-    | '/tasks/$taskId/edit'
-    | '/epics/$epicId'
-    | '/tasks/$taskId'
-    | '/epics/$epicId/milestones'
-    | '/epics/$epicId/milestones/$milestoneId/edit'
-    | '/epics/$epicId/milestones/$milestoneId'
+    | '/login'
+    | '/app'
+    | '/app/epics'
+    | '/app/tasks'
+    | '/app/epics/$epicId/edit'
+    | '/app/tasks/$taskId/edit'
+    | '/app/epics/$epicId'
+    | '/app/tasks/$taskId'
+    | '/app/epics/$epicId/milestones'
+    | '/app/epics/$epicId/milestones/$milestoneId/edit'
+    | '/app/epics/$epicId/milestones/$milestoneId'
   id:
     | '__root__'
     | '/'
-    | '/epics'
-    | '/tasks'
-    | '/epics/'
-    | '/tasks/'
-    | '/epics/$epicId/milestones'
-    | '/epics/$epicId/edit'
-    | '/tasks/$taskId/edit'
-    | '/epics/$epicId/'
-    | '/tasks/$taskId/'
-    | '/epics/$epicId/milestones/'
-    | '/epics/$epicId/milestones/$milestoneId/edit'
-    | '/epics/$epicId/milestones/$milestoneId/'
+    | '/app'
+    | '/login'
+    | '/app/epics'
+    | '/app/tasks'
+    | '/app/'
+    | '/app/epics/'
+    | '/app/tasks/'
+    | '/app/epics/$epicId/milestones'
+    | '/app/epics/$epicId/edit'
+    | '/app/tasks/$taskId/edit'
+    | '/app/epics/$epicId/'
+    | '/app/tasks/$taskId/'
+    | '/app/epics/$epicId/milestones/'
+    | '/app/epics/$epicId/milestones/$milestoneId/edit'
+    | '/app/epics/$epicId/milestones/$milestoneId/'
   fileRoutesById: FileRoutesById
 }
 
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  EpicsRouteRoute: typeof EpicsRouteRouteWithChildren
-  TasksRouteRoute: typeof TasksRouteRouteWithChildren
-  TasksTaskIdEditRoute: typeof TasksTaskIdEditRoute
+  AppRouteRoute: typeof AppRouteRouteWithChildren
+  LoginRoute: typeof LoginRoute
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  EpicsRouteRoute: EpicsRouteRouteWithChildren,
-  TasksRouteRoute: TasksRouteRouteWithChildren,
-  TasksTaskIdEditRoute: TasksTaskIdEditRoute,
+  AppRouteRoute: AppRouteRouteWithChildren,
+  LoginRoute: LoginRoute,
 }
 
 export const routeTree = rootRoute
@@ -369,73 +439,91 @@ export const routeTree = rootRoute
       "filePath": "__root.tsx",
       "children": [
         "/",
-        "/epics",
-        "/tasks",
-        "/tasks/$taskId/edit"
+        "/app",
+        "/login"
       ]
     },
     "/": {
       "filePath": "index.tsx"
     },
-    "/epics": {
-      "filePath": "epics/route.tsx",
+    "/app": {
+      "filePath": "app/route.tsx",
       "children": [
-        "/epics/",
-        "/epics/$epicId/milestones",
-        "/epics/$epicId/edit",
-        "/epics/$epicId/",
-        "/epics/$epicId/milestones/$milestoneId/edit"
+        "/app/epics",
+        "/app/tasks",
+        "/app/",
+        "/app/tasks/$taskId/edit"
       ]
     },
-    "/tasks": {
-      "filePath": "tasks.route.tsx",
+    "/login": {
+      "filePath": "login.tsx"
+    },
+    "/app/epics": {
+      "filePath": "app/epics/route.tsx",
+      "parent": "/app",
       "children": [
-        "/tasks/",
-        "/tasks/$taskId/"
+        "/app/epics/",
+        "/app/epics/$epicId/milestones",
+        "/app/epics/$epicId/edit",
+        "/app/epics/$epicId/",
+        "/app/epics/$epicId/milestones/$milestoneId/edit"
       ]
     },
-    "/epics/": {
-      "filePath": "epics/index.tsx",
-      "parent": "/epics"
-    },
-    "/tasks/": {
-      "filePath": "tasks.index.tsx",
-      "parent": "/tasks"
-    },
-    "/epics/$epicId/milestones": {
-      "filePath": "epics/$epicId/milestones/route.tsx",
-      "parent": "/epics",
+    "/app/tasks": {
+      "filePath": "app/tasks.route.tsx",
+      "parent": "/app",
       "children": [
-        "/epics/$epicId/milestones/",
-        "/epics/$epicId/milestones/$milestoneId/"
+        "/app/tasks/",
+        "/app/tasks/$taskId/"
       ]
     },
-    "/epics/$epicId/edit": {
-      "filePath": "epics/$epicId/edit.tsx",
-      "parent": "/epics"
+    "/app/": {
+      "filePath": "app/index.tsx",
+      "parent": "/app"
     },
-    "/tasks/$taskId/edit": {
-      "filePath": "tasks_.$taskId.edit.tsx"
+    "/app/epics/": {
+      "filePath": "app/epics/index.tsx",
+      "parent": "/app/epics"
     },
-    "/epics/$epicId/": {
-      "filePath": "epics/$epicId/index.tsx",
-      "parent": "/epics"
+    "/app/tasks/": {
+      "filePath": "app/tasks.index.tsx",
+      "parent": "/app/tasks"
     },
-    "/tasks/$taskId/": {
-      "filePath": "tasks.$taskId.index.tsx",
-      "parent": "/tasks"
+    "/app/epics/$epicId/milestones": {
+      "filePath": "app/epics/$epicId/milestones/route.tsx",
+      "parent": "/app/epics",
+      "children": [
+        "/app/epics/$epicId/milestones/",
+        "/app/epics/$epicId/milestones/$milestoneId/"
+      ]
     },
-    "/epics/$epicId/milestones/": {
-      "filePath": "epics/$epicId/milestones/index.tsx",
-      "parent": "/epics/$epicId/milestones"
+    "/app/epics/$epicId/edit": {
+      "filePath": "app/epics/$epicId/edit.tsx",
+      "parent": "/app/epics"
     },
-    "/epics/$epicId/milestones/$milestoneId/edit": {
-      "filePath": "epics/$epicId/milestones_/$milestoneId.edit.tsx",
-      "parent": "/epics"
+    "/app/tasks/$taskId/edit": {
+      "filePath": "app/tasks_.$taskId.edit.tsx",
+      "parent": "/app"
     },
-    "/epics/$epicId/milestones/$milestoneId/": {
-      "filePath": "epics/$epicId/milestones/$milestoneId.index.tsx",
-      "parent": "/epics/$epicId/milestones"
+    "/app/epics/$epicId/": {
+      "filePath": "app/epics/$epicId/index.tsx",
+      "parent": "/app/epics"
+    },
+    "/app/tasks/$taskId/": {
+      "filePath": "app/tasks.$taskId.index.tsx",
+      "parent": "/app/tasks"
+    },
+    "/app/epics/$epicId/milestones/": {
+      "filePath": "app/epics/$epicId/milestones/index.tsx",
+      "parent": "/app/epics/$epicId/milestones"
+    },
+    "/app/epics/$epicId/milestones/$milestoneId/edit": {
+      "filePath": "app/epics/$epicId/milestones_/$milestoneId.edit.tsx",
+      "parent": "/app/epics"
+    },
+    "/app/epics/$epicId/milestones/$milestoneId/": {
+      "filePath": "app/epics/$epicId/milestones/$milestoneId.index.tsx",
+      "parent": "/app/epics/$epicId/milestones"
     }
   }
 }

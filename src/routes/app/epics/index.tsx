@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/epics/")({
+export const Route = createFileRoute("/app/epics/")({
   async loader() {
     const epics = await fetch("http://localhost:5173/api/epics")
       .then((resp) => resp.json())
@@ -29,10 +29,10 @@ function Index() {
         {epics.map((e, idx) => (
           <div key={idx} className="flex gap-3">
             <div>{e.title}</div>
-            <Link to="/epics/$epicId" params={{ epicId: e.id }}>
+            <Link to="/app/epics/$epicId" params={{ epicId: e.id }}>
               View
             </Link>
-            <Link to="/epics/$epicId/edit" params={{ epicId: e.id }}>
+            <Link to="/app/epics/$epicId/edit" params={{ epicId: e.id }}>
               Edit
             </Link>
           </div>

@@ -1,5 +1,5 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
-import { fetchJson } from "../../backend/fetchUtils";
+import { fetchJson } from "../../../backend/fetchUtils";
 import { Fragment } from "react/jsx-runtime";
 
 type TaskOverview = {
@@ -7,7 +7,7 @@ type TaskOverview = {
   count: number;
 };
 
-export const Route = createFileRoute("/tasks")({
+export const Route = createFileRoute("/app/tasks")({
   component: TasksLayout,
   loader: async ({ context }) => {
     const now = +new Date();

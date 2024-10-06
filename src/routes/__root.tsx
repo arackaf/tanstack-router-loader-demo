@@ -1,19 +1,14 @@
-import { createRootRoute, Link, Outlet } from "@tanstack/react-router";
-import { getCurrentUser } from "../../backend/auth";
+import { createRootRouteWithContext, Link, Outlet, redirect } from "@tanstack/react-router";
+import { User } from "../main";
 
-export const Route = createRootRoute({
-  async beforeLoad({ location, context }) {
-    console.log({ context });
+export const Route = createRootRouteWithContext<{ user: User | null; value: number; update: () => void }>()({
+  async beforeLoad({ location }) {
     const timeStarted = +new Date();
     console.log("");
     console.log("Fresh navigation to", location.href);
     console.log("------------------------------------------------------------------------------------");
-    console.log("Root beforeLoad. Loading authentication info");
-    const currentUser = await getCurrentUser();
 
-    document.cookie = `user=${currentUser.id};path=/;max-age=31536000`;
-
-    return { currentUser, timestarted: timeStarted };
+    return { timestarted: timeStarted };
   },
   component: Root,
 });
@@ -23,19 +18,23 @@ function Root() {
 
   return (
     <>
-      <div className="p-2 flex gap-4">
-        <span className="mr-7">Welcome: {context.currentUser.name}</span>
-        <Link to="/" className="[&.active]:font-bold">
-          Home
-        </Link>
-        <Link to="/tasks" className="[&.active]:font-bold">
-          Tasks
-        </Link>
-        <Link to="/epics" className="[&.active]:font-bold">
-          Epics
-        </Link>
-      </div>
-      <hr />
+      {context.user ? (
+        <>
+          <div className="p-2 flex gap-4">
+            <span className="mr-7">Welcome: {context.user.name}</span>
+            <Link to="/app" className="[&.active]:font-bold">
+              Home
+            </Link>
+            <Link to="/app/tasks" className="[&.active]:font-bold">
+              Tasks
+            </Link>
+            <Link to="/app/epics" className="[&.active]:font-bold">
+              Epics
+            </Link>
+          </div>
+          <hr />
+        </>
+      ) : null}
       <div className="p-3">
         <Outlet />
       </div>

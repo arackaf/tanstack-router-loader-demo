@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/tasks/$taskId/")({
+export const Route = createFileRoute("/app/tasks/$taskId/")({
   component: TaskView,
 });
 
@@ -10,7 +10,7 @@ function TaskView() {
   return (
     <div className="flex flex-col gap-3 p-3">
       <div>
-        <Link to="/tasks">Back</Link>
+        <Link to="/app/tasks">Back</Link>
       </div>
       <div>View task {taskId}</div>
     </div>
