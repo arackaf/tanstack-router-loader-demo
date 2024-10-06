@@ -12,7 +12,7 @@ export type User = {
 };
 
 // Create a new router instance
-const router = createRouter({ routeTree, context: { user: null, value: 12, update: () => {} } });
+const router = createRouter({ routeTree });
 
 // Register the router instance for type safety
 declare module "@tanstack/react-router" {
@@ -23,20 +23,8 @@ declare module "@tanstack/react-router" {
 
 const Main: FC = () => {
   console.log("Application startup. Loading authentication info ... ");
-  const [currentUserPromise] = useState<Promise<User | null>>(() => getCurrentUser());
-  const [currentUser, setCurrentUser] = useState<User | null | undefined>(undefined);
 
-  useEffect(() => {
-    currentUserPromise.then((user) => {
-      setCurrentUser(user);
-    });
-  }, []);
-
-  if (currentUser === undefined) {
-    return <div>Loading ...</div>;
-  }
-
-  return <RouterProvider router={router} context={{ user: currentUser }} />;
+  return <RouterProvider router={router} />;
 };
 
 // Render the app

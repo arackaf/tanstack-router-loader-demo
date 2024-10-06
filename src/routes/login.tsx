@@ -1,17 +1,11 @@
-import { createFileRoute, redirect, useRouter } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/login")({
-  beforeLoad({ context }) {
-    if (context.user) {
-      throw redirect({ to: "/app" });
-    }
-  },
   component: () => {
-    const router = useRouter();
     function login() {
       const age = 60 * 60 * 24 * 30;
       document.cookie = `loggedout=;path=/;max-age=${age}`;
-      router.invalidate();
+      throw redirect({ to: "/app" });
     }
     return (
       <div>
