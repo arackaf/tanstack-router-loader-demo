@@ -1,7 +1,7 @@
 import { getRouteApi, useNavigate } from "@tanstack/react-router";
 import { FC, useRef } from "react";
 
-const route = getRouteApi("/epics/$epicId/milestones/");
+const route = getRouteApi("/app/epics/$epicId/milestones/");
 
 export const MilestoneSearch: FC<{}> = () => {
   const { epicId } = route.useParams();
@@ -13,7 +13,7 @@ export const MilestoneSearch: FC<{}> = () => {
 
   const searchRef = useRef<HTMLInputElement>(null as unknown as HTMLInputElement);
 
-  const navigate = useNavigate({ from: "/epics/$epicId/milestones/" });
+  const navigate = useNavigate({ from: "/app/epics/$epicId/milestones/" });
 
   const pageDown = () => {
     navigate({
