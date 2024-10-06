@@ -13,6 +13,10 @@ export const Route = createFileRoute("/app")({
   },
   component: () => {
     Route.useRouteContext();
-    return <Outlet />;
+    return (
+      <div>
+        <Outlet />
+      </div>
+    );
   },
 });
