@@ -10,6 +10,7 @@ export const Route = createFileRoute("/app/tasks/$taskId/")({
     return { task };
   },
   component: TaskView,
+  gcTime: 0,
 });
 
 function TaskView() {
