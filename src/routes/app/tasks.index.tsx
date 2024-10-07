@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { fetchJson } from "../../../backend/fetchUtils";
-
-type Task = any;
+import { Task } from "../../types";
 
 export const Route = createFileRoute("/app/tasks/")({
   component: Index,

@@ -5,6 +5,7 @@ import cors from "cors";
 import bodyParser from "body-parser";
 import { setup } from "./db-setup";
 import { query } from "./db-utils";
+import { Task } from "../src/types";
 
 const jsonParser = bodyParser.json();
 
@@ -32,8 +33,8 @@ app.get("/api/tasks/overview", function (req, res) {
     INNER JOIN users u
     ON t.userId = u.id
     GROUP BY u.id
-  `).then((epics) => {
-    res.json(epics);
+  `).then((tasks) => {
+    res.json(tasks);
   });
 });
 
@@ -46,8 +47,21 @@ app.get("/api/tasks", async function (req, res) {
     WHERE userId = ?
   `,
     [userId]
-  ).then((epics) => {
-    res.json(epics);
+  ).then((tasks) => {
+    res.json(tasks);
+  });
+});
+
+app.get("/api/tasks/:id", async function (req, res) {
+  query<Task[]>(
+    `
+    SELECT * 
+    FROM tasks t
+    WHERE id = ?
+  `,
+    [req.params.id]
+  ).then((tasks) => {
+    res.json(tasks[0]);
   });
 });
 

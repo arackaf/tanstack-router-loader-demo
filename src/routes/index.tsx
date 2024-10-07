@@ -1,7 +1,11 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/")({
-  beforeLoad({}) {},
+  beforeLoad({}) {
+    if (document.cookie.includes("user=1")) {
+      throw redirect({ to: "/app" });
+    }
+  },
   component: Index,
 });
 

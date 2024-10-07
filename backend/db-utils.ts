@@ -2,7 +2,7 @@ import path from "path";
 import sqlite3Module from "sqlite3";
 const sqlite3 = sqlite3Module.verbose();
 
-export function query(query: string, params: any[] = []) {
+export function query<T = unknown>(query: string, params: any[] = []): Promise<T> {
   return new Promise((res, rej) => {
     const db = new sqlite3.Database(path.join(__dirname, "db.txt"), sqlite3Module.OPEN_READWRITE, async (error) => {
       if (error) {
@@ -14,7 +14,7 @@ export function query(query: string, params: any[] = []) {
           return rej(err);
         }
 
-        return res(rows);
+        return res(rows as T);
       });
     });
   });

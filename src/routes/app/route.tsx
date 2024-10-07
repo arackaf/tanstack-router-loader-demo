@@ -1,4 +1,4 @@
-import { createFileRoute, Link, Outlet, redirect } from "@tanstack/react-router";
+import { createFileRoute, Link, Outlet, redirect, useRouter } from "@tanstack/react-router";
 import { getCurrentUser } from "../../../backend/auth";
 
 export const Route = createFileRoute("/app")({
@@ -15,6 +15,7 @@ export const Route = createFileRoute("/app")({
   },
   component: () => {
     const context = Route.useRouteContext();
+    const router = useRouter();
     return (
       <div>
         <div className="p-2 flex gap-4">
