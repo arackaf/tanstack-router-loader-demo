@@ -10,6 +10,8 @@ export const Route = createFileRoute("/app/tasks/")({
     const tasks = await fetchJson<Task[]>("api/tasks");
     return { tasks };
   },
+  gcTime: 1000 * 60 * 5,
+  staleTime: 1000 * 60 * 5,
 });
 
 function Index() {

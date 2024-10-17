@@ -20,7 +20,7 @@ export const Route = createFileRoute("/app")({
       <div>
         <div className="p-2 flex gap-4">
           <span className="mr-7">Welcome: {context.user.name}</span>
-          <Link to="/app/" className="[&.active]:font-bold">
+          <Link to="/app" activeOptions={{ exact: true }} className="[&.active]:font-bold">
             Home
           </Link>
           <Link to="/app/tasks" className="[&.active]:font-bold">

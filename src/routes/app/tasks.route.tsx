@@ -15,6 +15,8 @@ export const Route = createFileRoute("/app/tasks")({
     const tasksOverview = await fetchJson<TaskOverview[]>("api/tasks/overview");
     return { tasksOverview };
   },
+  gcTime: 1000 * 60 * 5,
+  staleTime: 1000 * 60 * 5,
 });
 
 function TasksLayout() {

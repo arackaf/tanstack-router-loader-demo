@@ -2,9 +2,9 @@ import express from "express";
 import cookieParser from "cookie-parser";
 // @ts-ignore
 import cors from "cors";
-import bodyParser from "body-parser";
+import bodyParser, { json } from "body-parser";
 import { setup } from "./db-setup";
-import { query } from "./db-utils";
+import { command, query } from "./db-utils";
 import { Task } from "../src/types";
 
 const jsonParser = bodyParser.json();
@@ -15,6 +15,7 @@ const app = express();
 app.use(cookieParser());
 app.use(cors());
 app.use(express.json());
+app.use(jsonParser);
 
 app.get("/", function (req, res) {
   res.json({});
@@ -65,9 +66,18 @@ app.get("/api/tasks/:id", async function (req, res) {
   });
 });
 
-app.post("/update", jsonParser, function (req, res) {
-  console.log(req.body);
-  res.json({ a: req.body });
+app.post("/api/task/update", jsonParser, function (req, res) {
+  const { id, title } = req.body;
+  command(
+    `
+    UPDATE tasks
+    SET title = ?
+    WHERE id = ?  
+  `,
+    [title, id]
+  ).then(() => {
+    res.json({ sucess: true });
+  });
 });
 
 app.listen(3000);
