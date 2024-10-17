@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, redirect, useNavigate, useRouter } from "@tanstack/react-router";
 import { fetchJson, postToApi } from "../../../backend/fetchUtils";
 import { Task } from "../../types";
 import { useRef } from "react";
@@ -17,10 +17,20 @@ export const Route = createFileRoute("/app/tasks/$taskId/edit")({
 function TaskEdit() {
   const { taskId } = Route.useParams();
   const { task } = Route.useLoaderData();
+  const router = useRouter();
   const newTitleEl = useRef<HTMLInputElement>(null);
+  const navigate = useNavigate();
 
-  const save = () => {
-    postToApi("api/task/update", { id: task.id, title: newTitleEl.current!.value });
+  const save = async () => {
+    await postToApi("api/task/update", { id: task.id, title: newTitleEl.current!.value });
+    router.invalidate({
+      filter: (route) => {
+        console.log({ pathname: route.pathname, id: route.id, routeId: route.routeId });
+        return true;
+      },
+    });
+
+    navigate({ to: "/app/tasks" });
   };
 
   return (
