@@ -48,9 +48,11 @@ app.get("/api/tasks", async function (req, res) {
     WHERE userId = ?
   `,
     [userId]
-  ).then((tasks) => {
-    res.json(tasks);
-  });
+  )
+    .then((tasks) => new Promise((res) => setTimeout(() => res(tasks), 750)))
+    .then((tasks) => {
+      res.json(tasks);
+    });
 });
 
 app.get("/api/tasks/:id", async function (req, res) {
@@ -61,9 +63,11 @@ app.get("/api/tasks/:id", async function (req, res) {
     WHERE id = ?
   `,
     [req.params.id]
-  ).then((tasks) => {
-    res.json(tasks[0]);
-  });
+  )
+    .then((tasks) => new Promise((res) => setTimeout(() => res(tasks), 750)))
+    .then((tasks: any) => {
+      res.json(tasks[0]);
+    });
 });
 
 app.post("/api/task/update", jsonParser, function (req, res) {
