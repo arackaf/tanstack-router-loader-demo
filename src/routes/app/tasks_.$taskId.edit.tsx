@@ -33,10 +33,10 @@ function TaskEdit() {
 
         if (route.routeId == "/app/tasks/") {
           return true;
-        } else if (route.routeId === "/app/tasks/$taskId/") {
-          // if (route.params.taskId === taskId) {
-          //   return true;
-          // }
+        } else if (route.routeId === "/app/tasks/$taskIdxxxxxxxxx/") {
+          if (route.params.taskIdx === taskId) {
+            return true;
+          }
           return true;
         }
         return false;
