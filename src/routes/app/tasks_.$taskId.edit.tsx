@@ -29,24 +29,21 @@ function TaskEdit() {
 
     router.invalidate({
       filter: (route) => {
-        console.log({ route });
-
         if (route.routeId == "/app/tasks/") {
           return true;
-        } else if (route.routeId === "/app/tasks/$taskIdxxxxxxxxx/") {
-          if (route.params.taskIdx === taskId) {
-            return true;
-          }
+        } else if (route.routeId === "/app/tasks/$taskId/" && route.params.taskIdX === taskId) {
           return true;
         }
+
         return false;
-        // console.log({
-        //   pathname: route.pathname,
-        //   id: route.id,
-        //   routeId: route.routeId,
-        // });
-        // return true;
       },
+
+      // console.log({
+      //   pathname: route.pathname,
+      //   id: route.id,
+      //   routeId: route.routeId,
+      // });
+      // return true;
     });
 
     navigate({ to: "/app/tasks" });
