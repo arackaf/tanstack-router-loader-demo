@@ -13,8 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "@tanstack/react-query": "^5.52.1",
-    "@tanstack/react-router": "^1.70.1",
-    "@tanstack/router-cli": "^1.69.1",
+    "@tanstack/react-router": "^1.77.0",
+    "@tanstack/router-cli": "^1.74.2",
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "@tanstack/router-devtools": "^1.35.3",
-    "@tanstack/router-vite-plugin": "^1.69.1",
+    "@tanstack/router-vite-plugin": "^1.76.4",
     "@types/cookie-parser": "^1.4.7",
     "@types/express": "^4.17.21",
     "@types/react": "^18.3.5",
