@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute(
-  '/app/epics/$epicId/milestones/$milestoneId/edit',
+  '/app/epics/$epicId/milestones_/$milestoneId/edit',
 )({
   component: MilestoneEdit,
 })
