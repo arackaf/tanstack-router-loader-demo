@@ -3,7 +3,7 @@ import { fetchJson, postToApi } from "../../../backend/fetchUtils";
 import { Task } from "../../types";
 import { useRef } from "react";
 
-export const Route = createFileRoute("/app/tasks/$taskId/edit")({
+export const Route = createFileRoute("/app/tasks_/$taskId/edit")({
   loader: async ({ params }) => {
     const { taskId } = params;
     const task = await fetchJson<Task>(`api/tasks/${taskId}`);
@@ -22,11 +22,30 @@ function TaskEdit() {
   const navigate = useNavigate();
 
   const save = async () => {
-    await postToApi("api/task/update", { id: task.id, title: newTitleEl.current!.value });
+    await postToApi("api/task/update", {
+      id: task.id,
+      title: newTitleEl.current!.value,
+    });
+
     router.invalidate({
       filter: (route) => {
-        console.log({ pathname: route.pathname, id: route.id, routeId: route.routeId });
-        return true;
+        console.log({ route });
+
+        if (route.routeId == "/app/tasks/") {
+          return true;
+        } else if (route.routeId === "/app/tasks/$taskId/") {
+          // if (route.params.taskId === taskId) {
+          //   return true;
+          // }
+          return true;
+        }
+        return false;
+        // console.log({
+        //   pathname: route.pathname,
+        //   id: route.id,
+        //   routeId: route.routeId,
+        // });
+        // return true;
       },
     });
 
