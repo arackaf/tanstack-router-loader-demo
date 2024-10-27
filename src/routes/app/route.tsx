@@ -31,7 +31,9 @@ export const Route = createFileRoute("/app")({
           </Link>
         </div>
         <hr />
-        <Outlet />
+        <div className="m-3">
+          <Outlet />
+        </div>
       </div>
     );
   },

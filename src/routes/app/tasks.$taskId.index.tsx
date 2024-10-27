@@ -5,6 +5,10 @@ import { Task } from "../../types";
 export const Route = createFileRoute("/app/tasks/$taskId/")({
   loader: async ({ params }) => {
     const { taskId } = params;
+
+    if (taskId == "22") {
+      throw new Error("I don't want to");
+    }
     const task = await fetchJson<Task>(`api/tasks/${taskId}`);
 
     return { task };
@@ -12,6 +16,10 @@ export const Route = createFileRoute("/app/tasks/$taskId/")({
   component: TaskView,
   gcTime: 1000 * 60 * 5,
   staleTime: 1000 * 60 * 5,
+  errorComponent: ({ error }) => <div className="m-4 p-4 text-xl text-red-500">Error loading task :(</div>,
+  pendingComponent: () => <div className="m-4 p-4 text-xl">Loading task ...</div>,
+  pendingMs: 150,
+  pendingMinMs: 200,
 });
 
 function TaskView() {

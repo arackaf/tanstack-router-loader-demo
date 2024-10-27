@@ -6,8 +6,8 @@ export const Route = createFileRoute("/app/")({
 
 function Index() {
   return (
-    <div className="p-2">
-      <h3>Top level index page</h3>
+    <div>
+      <h2 className="text-2xl">Top level index page</h2>
     </div>
   );
 }

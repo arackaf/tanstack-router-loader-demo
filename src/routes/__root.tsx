@@ -18,7 +18,7 @@ function Root() {
 
   return (
     <>
-      <div className="p-3">
+      <div className="p-x-2">
         <Outlet />
       </div>
     </>

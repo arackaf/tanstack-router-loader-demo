@@ -10,5 +10,9 @@ export const Route = createFileRoute("/")({
 });
 
 function Index() {
-  return <div>Public Homepage</div>;
+  return (
+    <div className="m-3">
+      <h2 className="text-2xl">Public Homepage</h2>
+    </div>
+  );
 }

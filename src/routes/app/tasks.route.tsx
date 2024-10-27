@@ -23,12 +23,12 @@ function TasksLayout() {
   const { tasksOverview } = Route.useLoaderData();
   return (
     <div className="flex flex-col gap-3">
-      <div>Task overview</div>
-      <div className="w-40 grid grid-cols-2">
+      <h2 className="text-2xl">Tasks overview</h2>
+      <div className="self-start inline-grid grid-cols-[auto_auto] gap-x-12 items-center p-3">
         {tasksOverview.map((item) => (
           <Fragment key={item.user}>
             <div className="font-bold">{item.user}</div>
-            <div>{item.count}</div>
+            <div className="justify-self-end">{item.count}</div>
           </Fragment>
         ))}
       </div>
