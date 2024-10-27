@@ -16,11 +16,14 @@ export const Route = createFileRoute("/app/tasks/$taskId/")({
 
 function TaskView() {
   const { task } = Route.useLoaderData();
+  const { isFetching } = Route.useMatch();
 
   return (
     <div className="flex flex-col gap-3 p-3">
       <div className="flex flex-col gap-2">
-        <div>Task {task.id}</div>
+        <div>
+          Task {task.id} {isFetching ? "Loading ..." : null}
+        </div>
         <h1 className="text-lg">{task.title}</h1>
         <Link className="text-blue-500 underline" to="/app/tasks/$taskId/edit" params={{ taskId: task.id }}>
           Edit

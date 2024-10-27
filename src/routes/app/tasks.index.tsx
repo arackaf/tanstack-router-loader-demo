@@ -16,10 +16,13 @@ export const Route = createFileRoute("/app/tasks/")({
 
 function Index() {
   const { tasks } = Route.useLoaderData();
+  const matchData = Route.useMatch();
+
+  const { isFetching } = matchData;
 
   return (
     <div className="p-2">
-      <h3>Tasks page!</h3>
+      <h3>Tasks page! {isFetching ? "Loading ..." : null}</h3>
       <div className="flex flex-col gap-2 p-3">
         {tasks.map((t, idx) => (
           <div key={idx} className="flex gap-3 items-center">
