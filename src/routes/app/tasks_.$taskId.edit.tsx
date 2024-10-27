@@ -31,7 +31,8 @@ function TaskEdit() {
       filter: (route) => {
         if (route.routeId == "/app/tasks/") {
           return true;
-        } else if (route.routeId === "/app/tasks/$taskId/" && route.params.taskIdX === taskId) {
+        }
+        if (route.routeId === "/app/tasks/$taskId/" && route.params.taskIdX === taskId) {
           return true;
         }
 
