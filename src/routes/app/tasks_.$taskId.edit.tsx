@@ -10,6 +10,7 @@ export const Route = createFileRoute("/app/tasks_/$taskId/edit")({
 
     return { task };
   },
+  staleTime: 1000 * 60 * 5,
   gcTime: 1000 * 60 * 5,
   component: TaskEdit,
 });

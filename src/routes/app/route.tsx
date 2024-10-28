@@ -13,6 +13,8 @@ export const Route = createFileRoute("/app")({
 
     return { user };
   },
+  gcTime: 1000 * 60 * 10,
+  staleTime: 1000 * 60 * 10,
   component: () => {
     const context = Route.useRouteContext();
 
