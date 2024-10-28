@@ -1,7 +1,17 @@
 import { createRootRoute, Outlet, useRouterState } from "@tanstack/react-router";
+import { useState, FC } from "react";
 
-const Loading = () => {
-  return <div className="fixed left-[50%] top-0 translate-x-[-50%] bg-yellow-300 rounded-b px-2 py-1">Loading ...</div>;
+const Loading: FC<{ shown: boolean }> = props => {
+  const { shown } = props;
+  const corePosition = "fixed left-[50%] top-0 translate-x-[-50%] bg-yellow-300";
+  return (
+    <div
+      style={{ opacity: shown ? 1 : 0, transition: shown ? "opacity 300ms ease-in 20ms" : "" }}
+      className={`${corePosition} rounded-b px-2 py-1`}
+    >
+      Loading ...
+    </div>
+  );
 };
 
 export const Route = createRootRoute({
@@ -23,7 +33,7 @@ function Root() {
   return (
     <>
       <div className="p-x-2">
-        {isNavigating ? <Loading /> : null}
+        <Loading shown={isNavigating} />
         <Outlet />
       </div>
     </>
