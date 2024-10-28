@@ -27,24 +27,17 @@ function TaskEdit() {
       title: newTitleEl.current!.value,
     });
 
-    router.invalidate({
-      filter: (route) => {
+    router.clearCache({
+      filter: route => {
         if (route.routeId == "/app/tasks/") {
           return true;
         }
-        if (route.routeId === "/app/tasks/$taskId/" && route.params.taskIdX === taskId) {
+        if (route.routeId === "/app/tasks/$taskId/" && route.params.taskId === taskId) {
           return true;
         }
 
         return false;
       },
-
-      // console.log({
-      //   pathname: route.pathname,
-      //   id: route.id,
-      //   routeId: route.routeId,
-      // });
-      // return true;
     });
 
     navigate({ to: "/app/tasks" });
