@@ -4,7 +4,6 @@ import { RouterProvider, createRouter } from "@tanstack/react-router";
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
-import { getCurrentUser } from "../backend/auth";
 
 export type User = {
   id: number;
@@ -22,7 +21,7 @@ declare module "@tanstack/react-router" {
 }
 
 const Main: FC = () => {
-  console.log("Application startup. Loading authentication info ... ");
+  console.log("Application startup... ");
 
   return <RouterProvider router={router} />;
 };
