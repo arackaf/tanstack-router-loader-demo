@@ -22,7 +22,7 @@ app.get("/", function (req, res) {
 });
 
 app.get("/api/epics", function (req, res) {
-  query("SELECT * FROM epics").then((epics) => {
+  query("SELECT * FROM epics").then(epics => {
     res.json(epics);
   });
 });
@@ -34,7 +34,7 @@ app.get("/api/tasks/overview", function (req, res) {
     INNER JOIN users u
     ON t.userId = u.id
     GROUP BY u.id
-  `).then((tasks) => {
+  `).then(tasks => {
     res.json(tasks);
   });
 });
@@ -47,10 +47,10 @@ app.get("/api/tasks", async function (req, res) {
     FROM tasks t
     WHERE userId = ?
   `,
-    [userId]
+    [userId],
   )
-    .then((tasks) => new Promise((res) => setTimeout(() => res(tasks), 750)))
-    .then((tasks) => {
+    .then(tasks => new Promise(res => setTimeout(() => res(tasks), 750)))
+    .then(tasks => {
       res.json(tasks);
     });
 });
@@ -62,9 +62,9 @@ app.get("/api/tasks/:id", async function (req, res) {
     FROM tasks t
     WHERE id = ?
   `,
-    [req.params.id]
+    [req.params.id],
   )
-    .then((tasks) => new Promise((res) => setTimeout(() => res(tasks), 750)))
+    .then(tasks => new Promise(res => setTimeout(() => res(tasks), 750)))
     .then((tasks: any) => {
       res.json(tasks[0]);
     });
@@ -78,7 +78,7 @@ app.post("/api/task/update", jsonParser, function (req, res) {
     SET title = ?
     WHERE id = ?  
   `,
-    [title, id]
+    [title, id],
   ).then(() => {
     res.json({ sucess: true });
   });

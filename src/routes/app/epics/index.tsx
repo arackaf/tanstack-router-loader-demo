@@ -3,8 +3,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 export const Route = createFileRoute("/app/epics/")({
   async loader() {
     const epics = await fetch("http://localhost:5173/api/epics")
-      .then((resp) => resp.json())
-      .then((resp) => {
+      .then(resp => resp.json())
+      .then(resp => {
         console.log("GET", resp);
       });
 

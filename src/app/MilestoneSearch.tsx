@@ -18,7 +18,7 @@ export const MilestoneSearch: FC<{}> = () => {
   const pageDown = () => {
     navigate({
       to: ".",
-      search: (prev) => {
+      search: prev => {
         return { ...prev, page: prev.page - 1 };
       },
     });
@@ -26,20 +26,20 @@ export const MilestoneSearch: FC<{}> = () => {
   const pageUp = () => {
     navigate({
       to: ".",
-      search: (prev) => {
+      search: prev => {
         return { ...prev, page: prev.page + 1 };
       },
     });
   };
   const updateSearchParams = () => {
-    let tags: any = [tag1.current.value, tag2.current.value, tag3.current.value].filter((val) => val);
+    let tags: any = [tag1.current.value, tag2.current.value, tag3.current.value].filter(val => val);
     if (tags.length === 0) {
       tags = undefined;
     }
 
     navigate({
       to: ".",
-      search: (prev) => {
+      search: prev => {
         return { ...prev, search: searchRef.current.value, tags };
       },
     });

@@ -25,7 +25,7 @@ function TasksLayout() {
     <div className="flex flex-col gap-3">
       <h2 className="text-2xl">Tasks overview</h2>
       <div className="self-start inline-grid grid-cols-[auto_auto] gap-x-12 items-center p-3">
-        {tasksOverview.map((item) => (
+        {tasksOverview.map(item => (
           <Fragment key={item.user}>
             <div className="font-bold">{item.user}</div>
             <div className="justify-self-end">{item.count}</div>

@@ -1,5 +1,5 @@
 export const fetchJson = <T>(relativeUrl: string) => {
-  return fetch(`http://localhost:5173/${relativeUrl}`).then((resp) => resp.json() as T);
+  return fetch(`http://localhost:5173/${relativeUrl}`).then(resp => resp.json() as T);
 };
 
 export const postToApi = <T>(relativeUrl: string, body = {}) => {
@@ -9,5 +9,5 @@ export const postToApi = <T>(relativeUrl: string, body = {}) => {
     headers: {
       "Content-Type": "application/json",
     },
-  }).then((resp) => resp.json() as T);
+  }).then(resp => resp.json() as T);
 };

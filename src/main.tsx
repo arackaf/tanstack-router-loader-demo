@@ -34,6 +34,6 @@ if (!rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <Main />
-    </StrictMode>
+    </StrictMode>,
   );
 }

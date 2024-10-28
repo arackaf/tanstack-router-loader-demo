@@ -4,7 +4,7 @@ import { epics, tasks, users } from "./seed-data";
 const sqlite3 = sqlite3Module.verbose();
 
 export async function setup() {
-  const db = new sqlite3.Database("backend/db.txt", sqlite3Module.OPEN_READWRITE, async (error) => {
+  const db = new sqlite3.Database("backend/db.txt", sqlite3Module.OPEN_READWRITE, async error => {
     if (error) {
       console.error({ error });
       return;
@@ -34,7 +34,7 @@ export async function setup() {
 
     function run(command: string, params: unknown[] = []): Promise<void> {
       return new Promise((res, rej) => {
-        db.run(command, params, (err) => {
+        db.run(command, params, err => {
           if (err) {
             rej(err);
           } else {
