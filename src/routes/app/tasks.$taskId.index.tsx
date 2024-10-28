@@ -3,13 +3,19 @@ import { fetchJson } from "../../../backend/fetchUtils";
 import { Task } from "../../types";
 
 export const Route = createFileRoute("/app/tasks/$taskId/")({
-  loader: async ({ params }) => {
+  loader: async ({ params, context, parentMatchPromise }) => {
+    console.log("tasks page", { context });
     const { taskId } = params;
 
     if (taskId == "22") {
       throw new Error("I don't want to");
     }
     const task = await fetchJson<Task>(`api/tasks/${taskId}`);
+
+    const parentData = await context.promise;
+    const parentMatch = await parentMatchPromise;
+    console.log({ parentData });
+    console.log({ parentMatch });
 
     return { task };
   },

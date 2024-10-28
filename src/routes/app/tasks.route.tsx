@@ -8,8 +8,15 @@ type TaskOverview = {
 };
 
 export const Route = createFileRoute("/app/tasks")({
+  beforeLoad: async ({ context }) => {
+    return {
+      promise: new Promise(resolve => setTimeout(() => resolve({ data: "Hello World" }), 3000)),
+    };
+  },
   component: TasksLayout,
   loader: async ({ context }) => {
+    console.log("tasks route", { context });
+
     const now = +new Date();
     console.log(`/tasks route loader. Loading task layout info at + ${now - context.timestarted}ms since start`);
     const tasksOverview = await fetchJson<TaskOverview[]>("api/tasks/overview");
