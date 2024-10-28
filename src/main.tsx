@@ -2,6 +2,8 @@ import { FC, StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 
+import { TanStackRouterDevtools } from "@tanstack/router-devtools";
+
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 
@@ -23,7 +25,12 @@ declare module "@tanstack/react-router" {
 const Main: FC = () => {
   console.log("Application startup... ");
 
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <RouterProvider router={router} />
+      <TanStackRouterDevtools router={router} />
+    </>
+  );
 };
 
 // Render the app

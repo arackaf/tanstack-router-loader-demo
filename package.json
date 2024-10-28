@@ -24,7 +24,7 @@
     "typescript": "^5.5.4"
   },
   "devDependencies": {
-    "@tanstack/router-devtools": "^1.35.3",
+    "@tanstack/router-devtools": "^1.77.5",
     "@tanstack/router-vite-plugin": "^1.76.4",
     "@types/cookie-parser": "^1.4.7",
     "@types/express": "^4.17.21",
