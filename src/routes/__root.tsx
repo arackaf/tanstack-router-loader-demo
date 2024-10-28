@@ -1,5 +1,4 @@
 import { createRootRoute, Outlet } from "@tanstack/react-router";
-import { User } from "../main";
 
 export const Route = createRootRoute({
   async beforeLoad({ location }) {
@@ -14,8 +13,6 @@ export const Route = createRootRoute({
 });
 
 function Root() {
-  const context = Route.useRouteContext();
-
   return (
     <>
       <div className="p-x-2">
