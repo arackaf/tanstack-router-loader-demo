@@ -12,10 +12,10 @@ export const Route = createFileRoute("/app/tasks/$taskId/")({
     }
     const task = await fetchJson<Task>(`api/tasks/${taskId}`);
 
-    const parentData = await context.promise;
     const parentMatch = await parentMatchPromise;
-    console.log({ parentData });
-    console.log({ parentMatch });
+    const tasksOverview = parentMatch?.loaderData?.tasksOverview;
+
+    console.log({ tasksOverview });
 
     return { task };
   },
