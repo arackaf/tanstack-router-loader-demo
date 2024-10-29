@@ -13,7 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@tanstack/react-query": "^5.52.1",
-    "@tanstack/react-router": "^1.77.4",
+    "@tanstack/react-router": "^1.77.6",
     "@tanstack/router-cli": "^1.74.2",
     "body-parser": "^1.20.2",
     "cookie-parser": "^1.4.6",
