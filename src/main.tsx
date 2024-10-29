@@ -6,6 +6,7 @@ import { TanStackRouterDevtools } from "@tanstack/router-devtools";
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export type User = {
   id: number;
@@ -22,12 +23,16 @@ declare module "@tanstack/react-router" {
   }
 }
 
+const queryClient = new QueryClient();
+
 const Main: FC = () => {
   console.log("Application startup... ");
 
   return (
     <>
-      <RouterProvider router={router} />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
       <TanStackRouterDevtools router={router} />
     </>
   );

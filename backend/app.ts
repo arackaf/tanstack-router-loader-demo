@@ -77,11 +77,35 @@ app.post("/api/task/update", jsonParser, function (req, res) {
     UPDATE tasks
     SET title = ?
     WHERE id = ?  
-  `,
+    `,
     [title, id],
   ).then(() => {
     res.json({ sucess: true });
   });
+});
+
+app.get("/api/epics/overview", async function (req, res) {
+  query<Task[]>(
+    `
+      WITH aggregates AS (
+          SELECT epicId, count(*) count
+          FROM epics e
+          INNER JOIN tasks t
+          ON e.id = t.epicId
+          GROUP BY epicId
+      )
+      SELECT e.name, agg.count
+      FROM epics e
+      INNER JOIN aggregates agg
+      ON e.id = agg.epicId
+      ORDER BY count ASC
+  `,
+    [],
+  )
+    .then(result => new Promise(res => setTimeout(() => res(result), 750)))
+    .then((result: any) => {
+      res.json(result);
+    });
 });
 
 app.listen(3000);
