@@ -5,16 +5,15 @@ export type Epic = {
   name: string;
 };
 
-export const epicsQueryOptions = {
+export const epicsQueryOptions = (timestarted: number) => ({
   queryKey: ["epics", "list"],
   queryFn: async () => {
-    const timestamp = (+new Date()).toString();
-    const timestampDisplay = timestamp.slice(timestamp.length - 4);
+    const timeDifference = +new Date() - timestarted;
 
-    console.log("Running api/epics query at", timestampDisplay);
+    console.log("Loading api/epics data at", timeDifference);
     const epics = await fetchJson<Epic[]>("api/epics");
     return epics;
   },
   staleTime: 1000 * 60 * 5,
   gcTime: 1000 * 60 * 5,
-};
+});

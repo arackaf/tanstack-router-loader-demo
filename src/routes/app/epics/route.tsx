@@ -2,13 +2,23 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { epicsSummaryQueryOptions } from "../../../app/queries/epicsSummaryQuery";
 import { Fragment } from "react/jsx-runtime";
+import { FC, Suspense } from "react";
 
 export const Route = createFileRoute("/app/epics")({
   component: EpicLayout,
 });
 
 function EpicLayout() {
-  const { data } = useSuspenseQuery(epicsSummaryQueryOptions);
+  return (
+    <Suspense fallback={<h1 className="text-2xl">Loading ...</h1>}>
+      <EpicsLayoutComponent />
+    </Suspense>
+  );
+}
+
+const EpicsLayoutComponent: FC<{}> = () => {
+  const context = Route.useRouteContext();
+  const { data } = useSuspenseQuery(epicsSummaryQueryOptions(context.timestarted));
 
   return (
     <div className="flex flex-col gap-3">
@@ -27,4 +37,4 @@ function EpicLayout() {
       </div>
     </div>
   );
-}
+};

@@ -5,16 +5,15 @@ export type EpicOverview = {
   count: number;
 };
 
-export const epicsSummaryQueryOptions = {
+export const epicsSummaryQueryOptions = (timestarted: number) => ({
   queryKey: ["epics", "summary"],
   queryFn: async () => {
-    const timestamp = (+new Date()).toString();
-    const timestampDisplay = timestamp.slice(timestamp.length - 4);
+    const timeDifference = +new Date() - timestarted;
 
-    console.log("Running api/epics/overview query at", timestampDisplay);
+    console.log("Running api/epics/overview query at", timeDifference);
     const epicsOverview = await fetchJson<EpicOverview[]>("api/epics/overview");
     return { epicsOverview };
   },
   staleTime: 1000 * 60 * 5,
   gcTime: 1000 * 60 * 5,
-};
+});

@@ -7,7 +7,9 @@ export const Route = createFileRoute("/app/epics/")({
 });
 
 function Index() {
-  const { data } = useSuspenseQuery(epicsQueryOptions);
+  const context = Route.useRouteContext();
+
+  const { data } = useSuspenseQuery(epicsQueryOptions(context.timestarted));
 
   return (
     <div className="p-3">

@@ -21,12 +21,6 @@ app.get("/", function (req, res) {
   res.json({});
 });
 
-app.get("/api/epics", function (req, res) {
-  query("SELECT * FROM epics").then(epics => {
-    res.json(epics);
-  });
-});
-
 app.get("/api/tasks/overview", function (req, res) {
   query(`
     SELECT u.name user, count(*) count
@@ -102,6 +96,14 @@ app.get("/api/epics/overview", async function (req, res) {
   `,
     [],
   )
+    .then(result => new Promise(res => setTimeout(() => res(result), 750)))
+    .then((result: any) => {
+      res.json(result);
+    });
+});
+
+app.get("/api/epics", function (req, res) {
+  query("SELECT * FROM epics")
     .then(result => new Promise(res => setTimeout(() => res(result), 750)))
     .then((result: any) => {
       res.json(result);
