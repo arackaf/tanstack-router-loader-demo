@@ -3,14 +3,8 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { epicsQueryOptions } from "../../../app/queries/epicsQuery";
 
 export const Route = createFileRoute("/app/epics/")({
-  context({ context }) {
-    return {
-      epicsQueryOptions: epicsQueryOptions(context.timestarted),
-    };
-  },
   loader({ context }) {
     const queryClient = context.queryClient;
-
     queryClient.prefetchQuery(epicsQueryOptions(context.timestarted));
   },
   component: Index,

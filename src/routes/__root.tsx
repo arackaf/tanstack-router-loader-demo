@@ -20,7 +20,7 @@ type MyRouterContext = {
 };
 
 export const Route = createRootRouteWithContext<MyRouterContext>()({
-  async beforeLoad({ location }) {
+  context({ location }) {
     const timeStarted = +new Date();
     console.log("");
     console.log("Fresh navigation to", location.href);

@@ -6,17 +6,21 @@ import { postToApi } from "../../../../../backend/fetchUtils";
 
 export const Route = createFileRoute("/app/epics/$epicId/edit")({
   component: EditEpic,
-  loader({ context, params }) {
-    const queryClient = context.queryClient;
-    queryClient.prefetchQuery(epicQueryOptions(context.timestarted, params.epicId));
+  context({ context, params }) {
+    return {
+      currentEpicOptions: epicQueryOptions(context.timestarted, params.epicId),
+    };
+  },
+  loader({ context }) {
+    context.queryClient.prefetchQuery(context.currentEpicOptions);
   },
 });
 
 function EditEpic() {
   const { epicId } = Route.useParams();
-  const { timestarted } = Route.useRouteContext();
+  const { currentEpicOptions } = Route.useRouteContext();
   const navigate = useNavigate({ from: "/app/epics/$epicId/edit" });
-  const { data: epic } = useSuspenseQuery(epicQueryOptions(timestarted, epicId));
+  const { data: epic } = useSuspenseQuery(currentEpicOptions);
   const newName = useRef<HTMLInputElement>(null);
 
   const [saving, setSaving] = useState(false);
@@ -30,11 +34,10 @@ function EditEpic() {
       id: epic.id,
       name: newName.current!.value,
     });
-    startTransition(() => {
-      queryClient.removeQueries({ queryKey: ["epics"] });
-      navigate({ to: "/app/epics" });
-      setSaving(false);
-    });
+
+    queryClient.invalidateQueries({ queryKey: ["epics"] });
+    navigate({ to: "/app/epics" });
+    setSaving(false);
   };
 
   return (
