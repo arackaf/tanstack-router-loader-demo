@@ -110,4 +110,33 @@ app.get("/api/epics", function (req, res) {
     });
 });
 
+app.get("/api/epics/:id", async function (req, res) {
+  query<Task[]>(
+    `
+    SELECT * 
+    FROM epics
+    WHERE id = ?
+  `,
+    [parseInt(req.params.id)],
+  )
+    .then(epics => new Promise(res => setTimeout(() => res(epics), 750)))
+    .then((epics: any) => {
+      res.json(epics[0]);
+    });
+});
+
+app.post("/api/epic/update", jsonParser, function (req, res) {
+  const { id, name } = req.body;
+  command(
+    `
+    UPDATE epics
+    SET name = ?
+    WHERE id = ?  
+    `,
+    [name, id],
+  ).then(() => {
+    res.json({ sucess: true });
+  });
+});
+
 app.listen(3000);
