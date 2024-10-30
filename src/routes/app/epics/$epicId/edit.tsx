@@ -6,6 +6,10 @@ import { postToApi } from "../../../../../backend/fetchUtils";
 
 export const Route = createFileRoute("/app/epics/$epicId/edit")({
   component: EditEpic,
+  loader({ context, params }) {
+    const queryClient = context.queryClient;
+    queryClient.prefetchQuery(epicQueryOptions(context.timestarted, params.epicId));
+  },
 });
 
 function EditEpic() {

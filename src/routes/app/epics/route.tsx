@@ -6,6 +6,10 @@ import { FC, Suspense } from "react";
 
 export const Route = createFileRoute("/app/epics")({
   component: EpicLayout,
+  loader({ context }) {
+    const queryClient = context.queryClient;
+    queryClient.prefetchQuery(epicsSummaryQueryOptions(context.timestarted));
+  },
 });
 
 function EpicLayout() {

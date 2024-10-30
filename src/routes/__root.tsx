@@ -1,4 +1,5 @@
-import { createRootRoute, Outlet, useRouterState } from "@tanstack/react-router";
+import { QueryClient } from "@tanstack/react-query";
+import { createRootRoute, createRootRouteWithContext, Outlet, useRouterState } from "@tanstack/react-router";
 import { useState, FC } from "react";
 
 const Loading: FC<{ shown: boolean }> = props => {
@@ -14,7 +15,11 @@ const Loading: FC<{ shown: boolean }> = props => {
   );
 };
 
-export const Route = createRootRoute({
+type MyRouterContext = {
+  queryClient: QueryClient;
+};
+
+export const Route = createRootRouteWithContext<MyRouterContext>()({
   async beforeLoad({ location }) {
     const timeStarted = +new Date();
     console.log("");
