@@ -1,7 +1,19 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { fetchJson } from "../../../../../backend/fetchUtils";
+
+import { Epic } from "../../../../types";
 
 export const Route = createFileRoute("/app/epics/$epicId/")({
   component: EpicIndex,
+  loader: async ({ params }) => {
+    const { epicId } = params;
+
+    const task = await fetchJson<Epic>(`api/tasks/${epicId}`);
+
+    return { task };
+  },
+  gcTime: 1000 * 60 * 5,
+  staleTime: 1000 * 60 * 5,
 });
 
 function EpicIndex() {
