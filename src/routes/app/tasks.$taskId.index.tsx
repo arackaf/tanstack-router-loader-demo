@@ -27,7 +27,8 @@ function TaskView() {
   const { isFetching } = Route.useMatch();
 
   return (
-    <div className="flex flex-col gap-3 p-3">
+    <div className="flex flex-col gap-4 p-3">
+      <Link to="/app/tasks">Back to tasks list</Link>
       <div className="flex flex-col gap-2">
         <div>
           Task {task.id} {isFetching ? "Loading ..." : null}
@@ -37,7 +38,6 @@ function TaskView() {
           Edit
         </Link>
         <div />
-        <Link to="/app/tasks">Back</Link>
       </div>
     </div>
   );

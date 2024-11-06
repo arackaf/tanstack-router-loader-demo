@@ -46,9 +46,8 @@ function TaskEdit() {
 
   return (
     <div className="flex flex-col gap-5 p-3">
-      <div>
-        <Link to="/app/tasks">Back</Link>
-      </div>
+      <Link to="/app/tasks">Back to tasks list</Link>
+
       <div>
         <div className="flex flex-col gap-2">
           <span>Edit task {taskId}</span>
