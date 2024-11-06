@@ -1,5 +1,5 @@
 import sqlite3Module from "sqlite3";
-import { epics, tasks, users } from "./seed-data";
+import { epics, milestones, tasks, users } from "./seed-data";
 
 const sqlite3 = sqlite3Module.verbose();
 
@@ -19,6 +19,9 @@ export async function setup() {
     await run("DROP TABLE IF EXISTS tasks");
     await run("CREATE TABLE tasks (id INT PRIMARY KEY, title TEXT, epicId INT, userId INT)");
 
+    await run("DROP TABLE IF EXISTS milestones");
+    await run("CREATE TABLE milestones (id INT PRIMARY KEY, epicId INT, name TEXT)");
+
     for (const user of users) {
       await run("INSERT INTO users VALUES (?, ?)", [user.id, user.name]);
     }
@@ -30,6 +33,10 @@ export async function setup() {
     let taskId = 1;
     for (const task of tasks) {
       await run("INSERT INTO tasks VALUES (?, ?, ?, ?)", [taskId++, task.name, task.epicId, task.userId]);
+    }
+
+    for (const milestone of milestones) {
+      await run("INSERT INTO milestones VALUES (?, ?, ?)", [milestone.id, milestone.epicId, milestone.name]);
     }
 
     function run(command: string, params: unknown[] = []): Promise<void> {

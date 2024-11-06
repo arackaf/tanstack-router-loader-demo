@@ -11,6 +11,20 @@ export const epics = [
   { id: 4, title: "Learn Java" },
 ];
 
+export const milestones = [
+  { id: 1, epicId: 1, name: "PlanetScale is setup" },
+  { id: 2, epicId: 1, name: "PlanetScale sdk working" },
+  { id: 3, epicId: 1, name: "Ready for testing" },
+  { id: 4, epicId: 2, name: "TypeScript tooling setup" },
+  { id: 5, epicId: 2, name: "Static typing basics" },
+  { id: 6, epicId: 2, name: "Advanced typing concepts" },
+  { id: 7, epicId: 3, name: "Authentication sdk setup" },
+  { id: 8, epicId: 3, name: "Auth accounts moved over" },
+  { id: 9, epicId: 4, name: "Set up Java sdk" },
+  { id: 10, epicId: 4, name: "Learn basics" },
+  { id: 11, epicId: 4, name: "Learn async" },
+];
+
 export const tasks = [
   // Epic 1 - Migrate to PlanetScale
   { name: "Set up PlanetScale account", epicId: 1, userId: 1 },

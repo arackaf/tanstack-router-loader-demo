@@ -1,24 +1,23 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { MilestoneSearch } from "../../../../../app/MilestoneSearch";
-
-const milestones = [
-  { id: "1", name: "Milestone 1" },
-  { id: "2", name: "Milestone 2" },
-  { id: "3", name: "Milestone 3" },
-];
+import { fetchJson } from "../../../../../../backend/fetchUtils";
+import { Milestone } from "../../../../../types";
 
 type SearchParams = {
-  page: number;
   search: string;
-  tags: string[];
 };
 
 export const Route = createFileRoute("/app/epics/$epicId/milestones/")({
+  loader: async ({ params }) => {
+    const { epicId } = params;
+
+    const milestones = await fetchJson<Milestone[]>(`api/epics/${epicId}/milestones`);
+
+    return { milestones };
+  },
   validateSearch(search: Record<string, unknown>): SearchParams {
     return {
-      page: Number(search.page ?? "1") ?? 1,
       search: (search.search as string) || "",
-      tags: Array.isArray(search.tags) ? search.tags : [],
     };
   },
   component: Milestones,
@@ -26,14 +25,12 @@ export const Route = createFileRoute("/app/epics/$epicId/milestones/")({
 
 function Milestones() {
   const { epicId } = Route.useParams();
-  const { page, search, tags } = Route.useSearch();
+  const { milestones } = Route.useLoaderData();
 
   return (
     <div className="flex flex-col gap-3 p-3">
       <div>Epic: {epicId}</div>
-      <div>Search values in route</div>
-      <pre>{JSON.stringify({ page, search, tags })}</pre>
-      <div>Current search values</div>
+
       <MilestoneSearch />
       {milestones.map((milestone, idx) => {
         return (

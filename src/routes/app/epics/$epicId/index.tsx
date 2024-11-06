@@ -8,9 +8,9 @@ export const Route = createFileRoute("/app/epics/$epicId/")({
   loader: async ({ params }) => {
     const { epicId } = params;
 
-    const task = await fetchJson<Epic>(`api/tasks/${epicId}`);
+    const epic = await fetchJson<Epic>(`api/epics/${epicId}`);
 
-    return { task };
+    return { epic };
   },
   gcTime: 1000 * 60 * 5,
   staleTime: 1000 * 60 * 5,
@@ -18,10 +18,11 @@ export const Route = createFileRoute("/app/epics/$epicId/")({
 
 function EpicIndex() {
   const { epicId } = Route.useParams();
+  const { epic } = Route.useLoaderData();
 
   return (
     <div className="flex flex-col gap-3 p-3">
-      <div>Viewing epic {epicId}</div>
+      <h2 className="text-xl">{epic.name}</h2>
       <Link to="/app/epics/$epicId/milestones" params={{ epicId }} search={{ search: "", page: 1, tags: [] }}>
         View milestones
       </Link>

@@ -139,4 +139,20 @@ app.post("/api/epic/update", jsonParser, function (req, res) {
   });
 });
 
+app.get("/api/epics/:id/milestones", async function (req, res) {
+  query<Task[]>(
+    `
+    SELECT * 
+    FROM milestones
+    WHERE epicId = ?
+    ORDER BY id ASC
+  `,
+    [parseInt(req.params.id)],
+  )
+    .then(epics => new Promise(res => setTimeout(() => res(epics), 750)))
+    .then((milestones: any) => {
+      res.json(milestones);
+    });
+});
+
 app.listen(3000);
