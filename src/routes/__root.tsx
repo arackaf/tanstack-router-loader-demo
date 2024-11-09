@@ -1,6 +1,6 @@
 import { QueryClient } from "@tanstack/react-query";
-import { createRootRoute, createRootRouteWithContext, Outlet, useRouterState } from "@tanstack/react-router";
-import { useState, FC } from "react";
+import { createRootRouteWithContext, Outlet, useRouterState } from "@tanstack/react-router";
+import { FC } from "react";
 
 const Loading: FC<{ shown: boolean }> = props => {
   const { shown } = props;
