@@ -4,11 +4,26 @@ import { epicsCountQueryOptions, epicsQueryOptions } from "../../../app/queries/
 import { Fragment } from "react/jsx-runtime";
 import { useDeferredValue, useState } from "react";
 
+type SearchParams = {
+  page: number;
+};
+
 export const Route = createFileRoute("/app/epics/")({
-  async loader({ context }) {
+  validateSearch(search: Record<string, unknown>): SearchParams {
+    return {
+      page: parseInt(search.page as string, 10) || 1,
+    };
+  },
+  loaderDeps: ({ search }) => {
+    return { page: search.page };
+  },
+  context: ({ deps }) => {
+    let x: number = deps.page;
+  },
+  async loader({ context, route, deps }) {
     const queryClient = context.queryClient;
     //await queryClient.ensureQueryData(epicsQueryOptions(context.timestarted, 1));
-    queryClient.prefetchQuery(epicsQueryOptions(context.timestarted, 1));
+    queryClient.prefetchQuery(epicsQueryOptions(context.timestarted, deps.page));
   },
   component: Index,
   pendingComponent: () => <div className="p-3 text-xl">Loading epics ...</div>,
@@ -18,8 +33,7 @@ export const Route = createFileRoute("/app/epics/")({
 
 function Index() {
   const context = Route.useRouteContext();
-
-  const [page, setPage] = useState(1);
+  const { page } = Route.useSearch();
 
   const deferredPage = useDeferredValue(page);
   const loading = page !== deferredPage;
@@ -46,16 +60,22 @@ function Index() {
           </Fragment>
         ))}
         <div className="flex gap-3">
-          <button className="border p-1 rounded" onClick={() => setPage(page - 1)} disabled={loading || page === 1}>
-            Prev
-          </button>
-          <button
+          <Link
+            to="/app/epics"
+            search={{ page: page - 1 }}
             className="border p-1 rounded"
-            onClick={() => setPage(page + 1)}
+            disabled={loading || page === 1}
+          >
+            Prev
+          </Link>
+          <Link
+            to="/app/epics"
+            search={{ page: page + 1 }}
+            className="border p-1 rounded"
             disabled={loading || !epicsData.length}
           >
             Next
-          </button>
+          </Link>
         </div>
       </div>
     </div>
