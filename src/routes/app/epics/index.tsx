@@ -31,8 +31,12 @@ const EpicsList: FC<{}> = ({}) => {
 
   const { data } = useSuspenseQuery(epicsQueryOptions(context.timestarted, deferredPage));
 
+  const loading = page !== deferredPage;
+
   return (
-    <div className="inline-grid gap-x-8 gap-y-4 grid-cols-[auto_auto_auto] items-center p-3">
+    <div
+      className={`inline-grid gap-x-8 gap-y-4 grid-cols-[auto_auto_auto] items-center p-3 ${loading ? "opacity-40" : ""}`}
+    >
       {data.map((e, idx) => (
         <Fragment key={idx}>
           <div>{e.name}</div>
@@ -45,10 +49,10 @@ const EpicsList: FC<{}> = ({}) => {
         </Fragment>
       ))}
       <div className="flex gap-3">
-        <button className="border p-1 rounded" onClick={() => setPage(page - 1)} disabled={page === 1}>
+        <button className="border p-1 rounded" onClick={() => setPage(page - 1)} disabled={loading || page === 1}>
           Prev
         </button>
-        <button className="border p-1 rounded" onClick={() => setPage(page + 1)} disabled={!data.length}>
+        <button className="border p-1 rounded" onClick={() => setPage(page + 1)} disabled={loading || !data.length}>
           Next
         </button>
       </div>
