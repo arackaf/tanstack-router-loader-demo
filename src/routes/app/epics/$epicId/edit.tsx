@@ -24,7 +24,6 @@ function EditEpic() {
   const newName = useRef<HTMLInputElement>(null);
 
   const [saving, setSaving] = useState(false);
-  const [_, startTransition] = useTransition();
 
   const queryClient = useQueryClient();
 

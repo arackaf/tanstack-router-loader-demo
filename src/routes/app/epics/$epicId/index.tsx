@@ -23,7 +23,7 @@ function EpicIndex() {
   return (
     <div className="flex flex-col gap-3 p-3">
       <h2 className="text-xl">{epic.name}</h2>
-      <Link to="/app/epics/$epicId/milestones" params={{ epicId }} search={{ search: "", page: 1, tags: [] }}>
+      <Link to="/app/epics/$epicId/milestones" params={{ epicId }} search={{ search: "" }}>
         View milestones
       </Link>
     </div>
