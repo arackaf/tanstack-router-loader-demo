@@ -111,6 +111,14 @@ app.get("/api/epics", function (req, res) {
     });
 });
 
+app.get("/api/epics/count", function (req, res) {
+  query("SELECT COUNT(*) count FROM epics")
+    .then(result => new Promise(res => setTimeout(() => res(result), 750)))
+    .then((result: any) => {
+      res.json(result);
+    });
+});
+
 app.get("/api/epics/:id", async function (req, res) {
   query<Task[]>(
     `
