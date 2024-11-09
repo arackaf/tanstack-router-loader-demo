@@ -33,7 +33,7 @@ const Main: FC = () => {
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} context={{ queryClient }} />
       </QueryClientProvider>
-      <TanStackRouterDevtools router={router} />
+      {/* <TanStackRouterDevtools router={router} /> */}
     </>
   );
 };

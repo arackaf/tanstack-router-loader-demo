@@ -23,7 +23,7 @@ export const Route = createFileRoute("/app/epics/")({
   async loader({ context, route, deps }) {
     const queryClient = context.queryClient;
     //await queryClient.ensureQueryData(epicsQueryOptions(context.timestarted, 1));
-    queryClient.prefetchQuery(epicsQueryOptions(context.timestarted, deps.page));
+    //queryClient.prefetchQuery(epicsQueryOptions(context.timestarted, deps.page));
   },
   component: Index,
   pendingComponent: () => <div className="p-3 text-xl">Loading epics ...</div>,
