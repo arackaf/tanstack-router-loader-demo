@@ -9,7 +9,7 @@ const userPacket: any = {
 
 export async function getCurrentUser() {
   if (!userPacket.user) {
-    await new Promise(res => setTimeout(res, 300));
+    //await new Promise(res => setTimeout(res, 300));
     userPacket.user = FAKE_USER;
   }
 
