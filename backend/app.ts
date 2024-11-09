@@ -103,7 +103,8 @@ app.get("/api/epics/overview", async function (req, res) {
 });
 
 app.get("/api/epics", function (req, res) {
-  query("SELECT * FROM epics")
+  const page = parseInt(req.query.page as string);
+  query("SELECT * FROM epics LIMIT ?, 4", [(page - 1) * 4])
     .then(result => new Promise(res => setTimeout(() => res(result), 750)))
     .then((result: any) => {
       res.json(result);

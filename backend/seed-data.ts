@@ -9,6 +9,14 @@ export const epics = [
   { id: 2, title: "Learn TypeScript" },
   { id: 3, title: "Implement New Authentication" },
   { id: 4, title: "Learn Java" },
+  { id: 5, title: "Dummy Epic 1" },
+  { id: 6, title: "Dummy Epic 2" },
+  { id: 7, title: "Dummy Epic 3" },
+  { id: 8, title: "Dummy Epic 4" },
+  { id: 9, title: "Dummy Epic 5" },
+  { id: 10, title: "Dummy Epic 6" },
+  { id: 11, title: "Dummy Epic 7" },
+  { id: 12, title: "Dummy Epic 8" },
 ];
 
 export const milestones = [

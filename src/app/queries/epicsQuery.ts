@@ -5,13 +5,13 @@ export type Epic = {
   name: string;
 };
 
-export const epicsQueryOptions = (timestarted: number) => ({
-  queryKey: ["epics", "list"],
+export const epicsQueryOptions = (timestarted: number, page: number) => ({
+  queryKey: ["epics", "list", page],
   queryFn: async () => {
     const timeDifference = +new Date() - timestarted;
 
     console.log("Loading api/epics data at", timeDifference);
-    const epics = await fetchJson<Epic[]>("api/epics");
+    const epics = await fetchJson<Epic[]>("api/epics?page=" + page);
     return epics;
   },
   staleTime: 1000 * 60 * 5,
