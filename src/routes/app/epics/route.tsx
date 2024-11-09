@@ -14,9 +14,9 @@ export const Route = createFileRoute("/app/epics")({
 
 function EpicLayout() {
   return (
-    <Suspense fallback={<h1 className="text-2xl">Loading ...</h1>}>
-      <EpicsLayoutComponent />
-    </Suspense>
+    // <Suspense fallback={<h1 className="text-2xl">Loading ...</h1>}>
+    <EpicsLayoutComponent />
+    // </Suspense>
   );
 }
 
