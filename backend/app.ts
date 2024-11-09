@@ -115,7 +115,8 @@ app.get("/api/epics/count", function (req, res) {
   query("SELECT COUNT(*) count FROM epics")
     .then(result => new Promise(res => setTimeout(() => res(result), 750)))
     .then((result: any) => {
-      res.json(result);
+      res.json([{ count: ~~(Math.random() * 10) }]);
+      //res.json(result);
     });
 });
 

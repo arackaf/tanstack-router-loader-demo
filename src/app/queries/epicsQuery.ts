@@ -27,6 +27,6 @@ export const epicsCountQueryOptions = (timestarted: number) => ({
     const result = await fetchJson<[{ count: number }]>("api/epics/count");
     return result[0];
   },
-  staleTime: 1000 * 60 * 5,
+  staleTime: 50,
   gcTime: 1000 * 60 * 5,
 });

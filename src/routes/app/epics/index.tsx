@@ -17,6 +17,18 @@ export const Route = createFileRoute("/app/epics/")({
 });
 
 function Index() {
+  const [render, setRender] = useState(true);
+
+  console.log({ render });
+
+  return (
+    <div className="flex flex-col gap-3">
+      <button onClick={() => setRender(val => !val)}>Toggle</button>
+      {render ? <Content /> : null}
+    </div>
+  );
+}
+function Content() {
   const context = Route.useRouteContext();
 
   const [page, setPage] = useState(1);
