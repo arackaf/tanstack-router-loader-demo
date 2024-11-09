@@ -28,7 +28,7 @@ export const Route = createFileRoute("/app")({
           <Link to="/app/tasks" className="[&.active]:font-bold">
             Tasks
           </Link>
-          <Link to="/app/epics" className="[&.active]:font-bold">
+          <Link to="/app/epics" search={{ page: 1 }} className="[&.active]:font-bold">
             Epics
           </Link>
         </div>
