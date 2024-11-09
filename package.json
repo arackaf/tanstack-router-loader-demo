@@ -7,7 +7,11 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite dev",
     "route-generate": "tsr generate",
-    "server": "npx tsx backend/app.ts"
+    "server": "tsx backend/app.ts",
+    "start-deployed": "concurrently --kill-others \"npm run server\" \"npm run start\"",
+    "build": "vite build",
+    "serve": "vite preview",
+    "start": "vite"
   },
   "author": "",
   "license": "ISC",
@@ -30,6 +34,8 @@
     "@types/express": "^4.17.21",
     "@types/react": "^18.3.5",
     "@types/react-dom": "^18.3.0",
+    "concurrently": "^9.1.0",
+    "tsx": "^4.19.2",
     "vite": "^5.4.8"
   }
 }
