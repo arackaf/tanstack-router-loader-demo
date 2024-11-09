@@ -2,7 +2,7 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { epicsQueryOptions } from "../../../app/queries/epicsQuery";
 import { Fragment } from "react/jsx-runtime";
-import { FC, Suspense, useState } from "react";
+import { FC, Suspense, useDeferredValue, useState } from "react";
 
 export const Route = createFileRoute("/app/epics/")({
   loader({ context }) {
@@ -27,7 +27,9 @@ const EpicsList: FC<{}> = ({}) => {
   const context = Route.useRouteContext();
 
   const [page, setPage] = useState(1);
-  const { data } = useSuspenseQuery(epicsQueryOptions(context.timestarted, page));
+  const deferredPage = useDeferredValue(page);
+
+  const { data } = useSuspenseQuery(epicsQueryOptions(context.timestarted, deferredPage));
 
   return (
     <div className="inline-grid gap-x-8 gap-y-4 grid-cols-[auto_auto_auto] items-center p-3">
