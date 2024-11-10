@@ -13,7 +13,9 @@ export const Route = createFileRoute("/app")({
 
     return { user };
   },
-
+  pendingMs: 200,
+  pendingMinMs: 0,
+  pendingComponent: () => <div className="m-4 p-4 text-blue-600 text-3xl">Loading App ...</div>,
   gcTime: 1000 * 60 * 10,
   staleTime: 1000 * 60 * 10,
   component: () => {
