@@ -3,12 +3,14 @@ import { fetchJson } from "../../../backend/fetchUtils";
 import { Task } from "../../types";
 
 export const Route = createFileRoute("/app/tasks/$taskId/")({
-  loader: async ({ params }) => {
+  loader: async ({ params, context }) => {
     const { taskId } = params;
 
     if (taskId == "22") {
       throw new Error("I don't want to");
     }
+    const now = +new Date();
+    console.log(`/tasks/${taskId} path loader. Loading at + ${now - context.timestarted}ms since start`);
     const task = await fetchJson<Task>(`api/tasks/${taskId}`);
 
     return { task };

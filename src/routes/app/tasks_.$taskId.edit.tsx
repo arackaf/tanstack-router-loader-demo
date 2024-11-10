@@ -4,8 +4,11 @@ import { Task } from "../../types";
 import { useRef } from "react";
 
 export const Route = createFileRoute("/app/tasks_/$taskId/edit")({
-  loader: async ({ params }) => {
+  loader: async ({ params, context }) => {
     const { taskId } = params;
+
+    const now = +new Date();
+    console.log(`/tasks/${taskId}/edit path loader. Loading at + ${now - context.timestarted}ms since start`);
     const task = await fetchJson<Task>(`api/tasks/${taskId}`);
 
     return { task };
