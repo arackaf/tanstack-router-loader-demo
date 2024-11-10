@@ -16,7 +16,7 @@ export type User = {
 const queryClient = new QueryClient();
 
 // Create a new router instance
-const router = createRouter({ routeTree, context: { queryClient } });
+const router = createRouter({ routeTree, defaultPendingMinMs: 0, context: { queryClient } });
 
 // Register the router instance for type safety
 declare module "@tanstack/react-router" {
@@ -33,7 +33,7 @@ const Main: FC = () => {
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} context={{ queryClient }} />
       </QueryClientProvider>
-      {/* <TanStackRouterDevtools router={router} /> */}
+      <TanStackRouterDevtools router={router} />
     </>
   );
 };
