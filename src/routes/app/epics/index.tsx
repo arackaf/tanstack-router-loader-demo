@@ -43,7 +43,7 @@ function Index() {
 
   return (
     <div className="p-3">
-      <h3 className="text-blue-600 text-2xl">Epics page!</h3>
+      <h3 className="text-2xl">Epics page!</h3>
       <h3 className="text-lg">There are {epicsCount.count} epics</h3>
       <div
         className={`inline-grid gap-x-8 gap-y-4 grid-cols-[auto_auto_auto] items-center p-3 ${loading ? "opacity-40" : ""}`}
