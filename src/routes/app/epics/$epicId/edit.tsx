@@ -35,14 +35,16 @@ function EditEpic() {
     });
 
     queryClient.invalidateQueries({ queryKey: ["epics"] });
-    navigate({ to: "/app/epics" });
+    navigate({ to: "/app/epics", search: { page: 1 } });
     setSaving(false);
   };
 
   return (
     <div className="flex flex-col gap-5 p-3">
       <div>
-        <Link to="/app/epics">Back</Link>
+        <Link to="/app/epics" search={{ page: 1 }}>
+          Back
+        </Link>
       </div>
       <div>
         <div className="flex flex-col gap-2">
