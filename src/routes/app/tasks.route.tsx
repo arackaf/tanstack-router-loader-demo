@@ -16,11 +16,14 @@ export const Route = createFileRoute("/app/tasks")({
     return { tasksOverview };
   },
   gcTime: 1000 * 60 * 5,
-  staleTime: 1000 * 60 * 5,
+  staleTime: 1000 * 60 * 2,
 });
 
 function TasksLayout() {
   const { tasksOverview } = Route.useLoaderData();
+
+  const { isFetching } = Route.useMatch();
+
   return (
     <div className="flex flex-col gap-3">
       <h2 className="text-2xl">Tasks overview</h2>

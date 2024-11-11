@@ -12,7 +12,7 @@ export const Route = createFileRoute("/app/tasks/")({
     return { tasks };
   },
   gcTime: 1000 * 60 * 5,
-  staleTime: 1000 * 60 * 5,
+  staleTime: 1000 * 60 * 2,
   pendingComponent: () => <div className="m-4 p-4 text-xl">Loading tasks list...</div>,
   pendingMs: 150,
   pendingMinMs: 200,
