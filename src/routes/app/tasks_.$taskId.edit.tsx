@@ -34,19 +34,15 @@ function TaskEdit() {
       title: newTitleEl.current!.value,
     });
 
-    router.clearCache({
+    router.invalidate({
       filter: route => {
-        if (route.routeId == "/app/tasks/") {
-          return true;
-        }
-        if (route.routeId === "/app/tasks/$taskId/" && route.params.taskId === taskId) {
-          return true;
-        }
-
-        return false;
+        return (
+          route.routeId == "/app/tasks/" ||
+          (route.routeId === "/app/tasks/$taskId/" && route.params.taskId === taskId) ||
+          (route.routeId === "/app/tasks_/$taskId/edit" && route.params.taskId === taskId)
+        );
       },
     });
-
     navigate({ to: "/app/tasks" });
   };
 
