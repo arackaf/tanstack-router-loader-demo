@@ -1,7 +1,7 @@
-import { createFileRoute, Link, redirect, useNavigate, useRouter } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate, useRouter } from "@tanstack/react-router";
 import { fetchJson, postToApi } from "../../../backend/fetchUtils";
 import { Task } from "../../types";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 
 export const Route = createFileRoute("/app/tasks_/$taskId/edit")({
   loader: async ({ params, context }) => {
@@ -43,8 +43,13 @@ function TaskEdit() {
         );
       },
     });
+
     navigate({ to: "/app/tasks" });
   };
+
+  useEffect(() => {
+    newTitleEl.current!.value = task.title;
+  }, [task.title]);
 
   return (
     <div className="flex flex-col gap-5 p-3">
