@@ -1,17 +1,6 @@
-import { useDeferredValue } from "react";
 import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { fetchJson } from "../../../../../backend/fetchUtils";
-
-import { Epic } from "../../../../types";
-
-const viewEpicQueryOptions = (epicId: string) => ({
-  queryKey: ["epics", "view", epicId],
-  queryFn: async () => {
-    const epic = await fetchJson<Epic>(`api/epics/${epicId}`);
-    return { epic };
-  },
-});
+import { epicQueryOptions } from "../../../../app/queries/epicQuery";
 
 export const Route = createFileRoute("/app/epics/$epicId/")({
   component: EpicIndex,
@@ -24,9 +13,9 @@ export const Route = createFileRoute("/app/epics/$epicId/")({
 
 function EpicIndex() {
   const { epicId } = Route.useParams();
+  const { timestarted } = Route.useRouteContext();
 
-  const { data } = useSuspenseQuery(viewEpicQueryOptions(epicId));
-  const { epic } = data;
+  const { data: epic } = useSuspenseQuery(epicQueryOptions(timestarted, epicId));
 
   return (
     <div className="flex flex-col gap-3 p-3">

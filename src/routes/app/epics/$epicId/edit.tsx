@@ -1,7 +1,7 @@
 import { useQueryClient, useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { epicQueryOptions } from "../../../../app/queries/epicQuery";
-import { useRef, useState, useTransition } from "react";
+import { useEffect, useRef, useState } from "react";
 import { postToApi } from "../../../../../backend/fetchUtils";
 
 export const Route = createFileRoute("/app/epics/$epicId/edit")({
@@ -34,10 +34,17 @@ function EditEpic() {
       name: newName.current!.value,
     });
 
-    queryClient.invalidateQueries({ queryKey: ["epics"] });
+    queryClient.removeQueries({ queryKey: ["epics"] });
+    queryClient.removeQueries({ queryKey: ["epic", epicId] });
+
     navigate({ to: "/app/epics", search: { page: 1 } });
+
     setSaving(false);
   };
+
+  useEffect(() => {
+    newName.current!.value = epic.name;
+  }, [epic.name]);
 
   return (
     <div className="flex flex-col gap-5 p-3">

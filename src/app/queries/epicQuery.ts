@@ -6,7 +6,7 @@ export type Epic = {
 };
 
 export const epicQueryOptions = (timestarted: number, id: string) => ({
-  queryKey: ["epics", id],
+  queryKey: ["epic", id],
   queryFn: async () => {
     const timeDifference = +new Date() - timestarted;
 
