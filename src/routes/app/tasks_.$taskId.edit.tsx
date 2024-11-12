@@ -13,9 +13,12 @@ export const Route = createFileRoute("/app/tasks_/$taskId/edit")({
 
     return { task };
   },
-  staleTime: 1000 * 60 * 5,
-  gcTime: 1000 * 60 * 5,
   component: TaskEdit,
+  staleTime: 1000 * 60 * 2,
+  gcTime: 1000 * 60 * 5,
+  pendingComponent: () => <div className="m-4 p-4 text-xl">Loading task ...</div>,
+  pendingMs: 150,
+  pendingMinMs: 200,
 });
 
 function TaskEdit() {
