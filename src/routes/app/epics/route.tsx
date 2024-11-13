@@ -2,7 +2,6 @@ import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 import { epicsSummaryQueryOptions } from "../../../app/queries/epicsSummaryQuery";
 import { Fragment } from "react/jsx-runtime";
-import { FC } from "react";
 
 export const Route = createFileRoute("/app/epics")({
   component: EpicLayout,
@@ -14,10 +13,6 @@ export const Route = createFileRoute("/app/epics")({
 });
 
 function EpicLayout() {
-  return <EpicsLayoutComponent />;
-}
-
-const EpicsLayoutComponent: FC<{}> = () => {
   const context = Route.useRouteContext();
   const { data } = useSuspenseQuery(epicsSummaryQueryOptions(context.timestarted));
 
@@ -38,4 +33,4 @@ const EpicsLayoutComponent: FC<{}> = () => {
       </div>
     </div>
   );
-};
+}
