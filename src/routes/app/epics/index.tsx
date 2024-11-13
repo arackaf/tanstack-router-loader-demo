@@ -17,13 +17,11 @@ export const Route = createFileRoute("/app/epics/")({
   loaderDeps: ({ search }) => {
     return { page: search.page };
   },
-  context: ({ deps }) => {
-    let x: number = deps.page;
-  },
-  async loader({ context, route, deps }) {
+  async loader({ context, deps }) {
     const queryClient = context.queryClient;
-    //await queryClient.ensureQueryData(epicsQueryOptions(context.timestarted, 1));
-    //queryClient.prefetchQuery(epicsQueryOptions(context.timestarted, deps.page));
+
+    queryClient.prefetchQuery(epicsQueryOptions(context.timestarted, deps.page));
+    queryClient.prefetchQuery(epicsCountQueryOptions(context.timestarted));
   },
   component: Index,
   pendingComponent: () => <div className="p-3 text-xl">Loading epics ...</div>,
@@ -32,8 +30,8 @@ export const Route = createFileRoute("/app/epics/")({
 });
 
 function Index() {
-  const context = Route.useRouteContext();
   const { page } = Route.useSearch();
+  const context = Route.useRouteContext();
 
   const deferredPage = useDeferredValue(page);
   const loading = page !== deferredPage;
