@@ -25,7 +25,7 @@ export const Route = createFileRoute("/app/epics/")({
   },
   component: Index,
   pendingComponent: () => <div className="p-3 text-xl">Loading epics ...</div>,
-  pendingMinMs: 3000,
+  pendingMinMs: 200,
   pendingMs: 10,
 });
 
