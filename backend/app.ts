@@ -28,9 +28,11 @@ app.get("/api/tasks/overview", function (req, res) {
     INNER JOIN users u
     ON t.userId = u.id
     GROUP BY u.id
-  `).then(tasks => {
-    res.json(tasks);
-  });
+  `)
+    .then(tasks => new Promise(res => setTimeout(() => res(tasks), 750)))
+    .then(tasks => {
+      res.json(tasks);
+    });
 });
 
 app.get("/api/tasks", async function (req, res) {
